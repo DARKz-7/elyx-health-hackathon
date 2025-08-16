@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Elyx Health — Plan Overview</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Status badge styles */
+    .status-badge {
+      padding: 3px 9px;
+      border-radius: 12px;
+      font-weight: 600;
+      color: white;
+      display: inline-block;
+    }
+    .status-Active { background-color: #28a745; }     /* green */
+    .status-Scheduled { background-color: #17a2b8; }  /* teal */
+    .status-Pending { background-color: #ffc107; }    /* yellow */
+    .status-Completed { background-color: #6c757d; }  /* gray */
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html">Chat</a> |
+    <a href="metrics.html">Metrics</a> |
+    <a href="plans.html" class="active">Plan</a>
+  </nav>
+
+  <header style="text-align:center; margin:2em 0 1.2em;">
+    <h1 style="margin-bottom:0.2em;">Care Plan & Interventions</h1>
+    <p style="color:#444;">See the personalized care plan, goals, and scheduled interventions.</p>
+  </header>
+
+  <section style="width:95%;max-width:900px;margin:auto;">
+    <table class="metrics-table">
+      <thead>
+        <tr>
+          <th>Goal/Intervention</th>
+          <th>Status</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Lead</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody id="plan-table-body">
+        <!-- Rows will be populated by JavaScript -->
+      </tbody>
+    </table>
+  </section>
+
+  <script>
+    async function loadPlanData() {
+      const response = await fetch('plan_data.json');
+      if (!response.ok) {
+        console.error('Failed to load plan data');
+        return;
+      }
+      const plans = await response.json();
+      const tbody = document.getElementById('plan-table-body');
+      plans.forEach(plan => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${plan.goal}</td>
+          <td><span class="status-badge status-${plan.status.replace(/\s/g, '')}">${plan.status}</span></td>
+          <td>${plan.start_date}</td>
+          <td>${plan.end_date}</td>
+          <td>${plan.lead}</td>
+          <td>${plan.notes}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    window.onload = loadPlanData;
+  </script>
+
+</body>
+</html>
+
