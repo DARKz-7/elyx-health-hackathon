@@ -2,6 +2,19 @@ from models import Member, TeamMember, Conversation
 from models import validate_member, validate_team, validate_conversation
 from datetime import datetime
 
+def validate_diagnostic_tests(tests):
+    for test in tests:
+        assert test.test_type, f"DiagnosticTest ID {test.id} missing test_type"
+        assert test.test_date, f"DiagnosticTest ID {test.id} missing test_date"
+        assert isinstance(test.results, dict), f"DiagnosticTest ID {test.id} results must be dict"
+    print("All diagnostic tests validated successfully.")
+
+def validate_plans(plans):
+    for plan in plans:
+        assert plan.summary, f"Plan ID {plan.id} missing summary"
+        assert isinstance(plan.interventions, list), f"Plan ID {plan.id} interventions must be list"
+    print("All plans validated successfully.")
+
 member = Member(
     id=1,
     name="Rohan Patel",
