@@ -1,12 +1,11 @@
 import random
 from datetime import timedelta
-
 from models import Conversation
 
 def advance_days(base_date, days):
     return base_date + timedelta(days=days)
 
-def simulate_conversations(member, team, start_date):
+def simulate_conversations_static(member, team, start_date):
     conv_id = 1
     conversations = []
 
@@ -43,16 +42,17 @@ def simulate_conversations(member, team, start_date):
     ))
     conv_id += 1
 
-    for month_week in range(2*4):
+    # Generate repeated member queries every two weeks for 8 weeks (approx. 2 months)
+    for month_week in range(2 * 4):
         conv_id += 1
-        recipient = random.choice([t.name for t in team if t.name != member.name])
+        recipient = random.choice([tm.name for tm in team if tm.name != member.name])
         conversations.append(Conversation(
             id=conv_id,
-            timestamp=advance_days(start_date, 2 + month_week*2),
+            timestamp=advance_days(start_date, 2 + month_week * 14),
             sender=member.name,
             sender_role="Member",
             recipient=recipient,
-            message=f"Week {(month_week//4)+1}, Query {(month_week%4)+1}: Read about Omega-3. Should I supplement?",
+            message=f"Week {(month_week // 4) + 1}, Query {(month_week % 4) + 1}: Read about Omega-3. Should I supplement?",
             message_type="query"
         ))
 
@@ -69,93 +69,71 @@ def simulate_conversations(member, team, start_date):
 
     return conversations
 
-def simulate_advanced_conversations(member, team, start_date):
-    conv_id = 100
+def simulate_conversations_dynamic(member, team, start_date, plans, interventions, metrics):
     conversations = []
+    conv_id = 1000  # Starting at 1000 to avoid ID conflicts
 
-    for weeks in range(0, 8, 2):
-        conv_id += 1
-        conversations.append(Conversation(
-            id=conv_id,
-            timestamp=advance_days(start_date, weeks * 7),
-            sender="Rachel",
-            sender_role="PT",
-            recipient=member.name,
-            message=f"Time for your exercise program update for week {weeks+1}. We'll adapt based on your progress.",
-            message_type="plan_update"
-        ))
-        conv_id += 1
-        conversations.append(Conversation(
-            id=conv_id,
-            timestamp=advance_days(start_date, weeks * 7 + 1),
-            sender=member.name,
-            sender_role="Member",
-            recipient="Rachel",
-            message="Travelling to US next week. Can you send hotel-friendly exercise suggestions?",
-            message_type="query"
-        ))
-        conv_id += 1
-        conversations.append(Conversation(
-            id=conv_id,
-            timestamp=advance_days(start_date, weeks * 7 + 2),
-            sender="Rachel",
-            sender_role="PT",
-            recipient=member.name,
-            message="Here is a hotel gym circuit for your travel week. Let me know if any equipment is missing.",
-            message_type="plan_update"
-        ))
-
-    conv_id += 1
+    # Initial greeting
     conversations.append(Conversation(
         id=conv_id,
-        timestamp=advance_days(start_date, 17),
+        timestamp=start_date,
         sender=member.name,
         sender_role="Member",
         recipient="Ruby",
-        message="I'm getting frustrated at the slow pace of changes. Can I see a consolidated plan update?",
-        message_type="feedback"
+        message="Hi Ruby!",
+        message_type="query"
     ))
     conv_id += 1
-    conversations.append(Conversation(
-        id=conv_id,
-        timestamp=advance_days(start_date, 18),
-        sender="Neel",
-        sender_role="Concierge Lead",
-        recipient=member.name,
-        message="Thank you for your feedback, Rohan. We will compile a priority and rationale summary ASAP.",
-        message_type="update"
-    ))
-    return conversations
-from datetime import timedelta
-from models import Conversation
 
-def simulate_conversations(member, team, start_date, plans, interventions, metrics):
-    conversations = []
-
-    # Existing or initial conversation events
-    # Example initial greeting
-    conversations.append(
-        Conversation(
-            id=1,
-            timestamp=start_date,
-            sender=member.name,
-            sender_role="Member",
-            recipient="Ruby",
-            message="Hi Ruby!",
-            message_type="query"
-        )
-    )
-    
-    # Simulate weekly check-ins or conversations over a timeline (e.g., 8 months)
-    num_weeks = 32  # approx. 8 months
+    num_weeks = 32  # approx 8 months
 
     for week in range(num_weeks):
         current_date = start_date + timedelta(weeks=week)
 
-        # Example: Check relevant metric for this week
-        week_metric = next((m for m in metrics if m.date.isocalendar()[1] == current_date.isocalendar()[1]), None)
+        # Weekly check-in message from PT every 2 weeks
+        if week % 2 == 0:
+            conversations.append(Conversation(
+                id=conv_id,
+                timestamp=current_date,
+                sender="Rachel",
+                sender_role="PT",
+                recipient=member.name,
+                message=f"Time for your exercise program update for week {week+1}. We'll adapt based on your progress.",
+                message_type="plan_update"
+            ))
+            conv_id += 1
 
-        if week_metric and week_metric.metric_type == "ExerciseMinutes":
-            # If exercise minutes are below threshold, create/update intervention and add a chat message
-            if week_metric.value < 120:
-                # Update intervention status and details here (assumed done outside or prior)
+            conversations.append(Conversation(
+                id=conv_id,
+                timestamp=current_date + timedelta(days=1),
+                sender=member.name,
+                sender_role="Member",
+                recipient="Rachel",
+                message="Travelling to US next week. Can you send hotel-friendly exercise suggestions?",
+                message_type="query"
+            ))
+            conv_id += 1
+
+            conversations.append(Conversation(
+                id=conv_id,
+                timestamp=current_date + timedelta(days=2),
+                sender="Rachel",
+                sender_role="PT",
+                recipient=member.name,
+                message="Here is a hotel gym circuit for your travel week. Let me know if any equipment is missing.",
+                message_type="plan_update"
+            ))
+            conv_id += 1
+
+        # Monitor exercise metric and respond if below threshold
+        week_metric = next((m for m in metrics if m.date.isocalendar()[1] == current_date.isocalendar()[1]
+                           and m.metric_type == "ExerciseMinutes"), None)
+        if week_metric and week_metric.value < 120:
+            # Add a plan update message indicating adjustment
+            conversations.append(Conversation(
+                id=conv_id,
+                timestamp=current_date + timedelta(hours=10),
+                sender="Rachel",
+                sender_role="PT",
+                recipient=member.name,
+                message="We noticed your exercise log dropped. Adjusting your plan for a better
