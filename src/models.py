@@ -97,3 +97,18 @@ def validate_conversation(convs):
         assert conv.recipient, f"Conversation ID {conv.id} has empty recipient"
     print("All conversations validated successfully.")
 
+def validate_diagnostic_test(test):
+    assert test.test_type, "DiagnosticTest must have a test_type"
+    assert isinstance(test.results, dict), "Results should be a dictionary"
+    print(f"DiagnosticTest ID {test.id} validated.")
+
+def validate_plan(plan):
+    assert plan.summary, "Plan must have a summary"
+    assert isinstance(plan.interventions, list), "Interventions must be a list"
+    print(f"Plan ID {plan.id} validated.")
+
+def validate_intervention(inter):
+    assert inter.type, "Intervention must have a type"
+    assert inter.status in ["active", "completed", "changed"], "Status must be active, completed, or changed"
+    print(f"Intervention ID {inter.id} validated.")
+
