@@ -5,6 +5,10 @@ from scenario_simulator import simulate_conversations, simulate_advanced_convers
 from model_validation_demo import (
     validate_member, validate_team, validate_conversation, validate_diagnostic_tests
 )
+from models import (
+    validate_member, validate_team, validate_conversation,
+    validate_diagnostic_tests, validate_plans, validate_interventions
+)
 
 def create_team():
     return [

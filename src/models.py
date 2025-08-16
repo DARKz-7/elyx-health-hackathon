@@ -78,6 +78,20 @@ class Metric:
     source: str
 
     # --- Model Validation Utilities ---
+def validate_diagnostic_tests(tests):
+    for test in tests:
+        validate_diagnostic_test(test)
+    print("All diagnostic tests validated successfully.")
+
+def validate_plans(plans):
+    for plan in plans:
+        validate_plan(plan)
+    print("All plans validated successfully.")
+
+def validate_interventions(interventions):
+    for inter in interventions:
+        validate_intervention(inter)
+    print("All interventions validated successfully.")
 
 def validate_member(member):
     assert member.name, "Name cannot be empty"
