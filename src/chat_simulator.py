@@ -1,11 +1,14 @@
 from datetime import datetime, timedelta
 from models import Member, TeamMember, DiagnosticTest, Metric
-from data_io import save_to_csv, save_to_json
-from scenario_simulator import simulate_conversations, simulate_advanced_conversations
+from scenario_simulator import (
+    simulate_conversations, simulate_advanced_conversations,
+    create_personalized_plan, create_interventions, create_metrics, create_diagnostic_tests
+)
 from model_validation_demo import (
     validate_member, validate_team, validate_conversation,
-    validate_diagnostic_tests, validate_metrics
+    validate_diagnostic_tests, validate_plans, validate_interventions, validate_metrics
 )
+from data_io import save_to_csv, save_to_json
 
 def create_team():
     return [
@@ -37,74 +40,31 @@ def create_member():
         support_network=["Wife", "2 kids", "Cook at home"]
     )
 
-def create_diagnostic_tests(member):
-    return [
-        DiagnosticTest(
-            id=101,
-            member_id=member.id,
-            test_type="Full Blood Panel",
-            test_date=datetime(2025, 4, 15, 9, 0),
-            results={"ApoB": 105, "hs-CRP": 2.7, "Glucose": 90},
-            ordered_by=201,
-            summary="ApoB slightly elevated; CRP mild inflammation; glucose normal."
-        ),
-        DiagnosticTest(
-            id=102,
-            member_id=member.id,
-            test_type="Lipid Profile",
-            test_date=datetime(2025, 7, 15, 9, 0),
-            results={"LDL": 135, "HDL": 45, "Triglycerides": 140},
-            ordered_by=201,
-            summary="LDL moderately high, HDL low-normal, Triglycerides normal."
-        )
-    ]
-
-def create_metrics(member, start_date, num_weeks):
-    metrics = []
-    for week in range(num_weeks):
-        dt = start_date + timedelta(weeks=week)
-        metrics.append(
-            Metric(
-                id=week+1,
-                member_id=member.id,
-                metric_type="ExerciseMinutes",
-                value=150 + week * 2,  # increasing activity
-                date=dt,
-                source="manual_log"
-            )
-        )
-        metrics.append(
-            Metric(
-                id=100 + week + 1,
-                member_id=member.id,
-                metric_type="SymptomFatigueScore",
-                value=max(0, 7 - week * 0.3),  # decreasing fatigue
-                date=dt,
-                source="questionnaire"
-            )
-        )
-    return metrics
-
 def main():
-    team = create_team()
-    member = create_member()
     start_date = datetime(2025, 1, 15, 9, 0)
 
+    team = create_team()
+    member = create_member()
+    diagnostic_tests = create_diagnostic_tests(member)
+    plan = create_personalized_plan(member, start_date)
+    interventions = create_interventions(member, start_date)
+    metrics = create_metrics(member, start_date, num_weeks=32)
+
+    # Simulate conversations, passing plan, interventions, metrics for advanced convos
     conversations = simulate_conversations(member, team, start_date)
-    conversations += simulate_advanced_conversations(member, team, start_date)
+    conversations += simulate_advanced_conversations(member, team, start_date, [plan], interventions, metrics)
     conversations.sort(key=lambda c: c.timestamp)
 
-    diagnostic_tests = create_diagnostic_tests(member)
-    metrics = create_metrics(member, start_date, num_weeks=32)  # approx. 8 months
-
-    # Run validations
+    # Validations
     validate_member(member)
     validate_team(team)
     validate_conversation(conversations)
     validate_diagnostic_tests(diagnostic_tests)
+    validate_plans([plan])
+    validate_interventions(interventions)
     validate_metrics(metrics)
 
-    # Save data
+    # Save all data
     save_to_csv('conversations.csv', conversations,
                 ['id', 'timestamp', 'sender', 'sender_role', 'recipient', 'message',
                  'message_type', 'related_event', 'attachments'])
@@ -113,6 +73,15 @@ def main():
     save_to_csv('diagnostics.csv', diagnostic_tests,
                 ['id', 'member_id', 'test_type', 'test_date', 'results', 'ordered_by', 'summary'])
     save_to_json('diagnostics.json', diagnostic_tests)
+
+    save_to_csv('plans.csv', [plan],
+                ['id', 'member_id', 'created_by', 'created_at', 'summary', 'interventions', 'version'])
+    save_to_json('plans.json', [plan])
+
+    save_to_csv('interventions.csv', interventions,
+                ['id', 'member_id', 'created_by', 'type', 'start_date', 'end_date', 'details',
+                 'status', 'rationale', 'linked_conversation_id'])
+    save_to_json('interventions.json', interventions)
 
     save_to_csv('metrics.csv', metrics,
                 ['id', 'member_id', 'metric_type', 'value', 'date', 'source'])
