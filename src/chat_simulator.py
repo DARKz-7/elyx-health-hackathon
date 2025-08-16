@@ -123,3 +123,8 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+from data_io import save_to_json
+
+save_to_json('data/conversations.json', conversations)
+print("Exported latest conversations to data/conversations.json!")
