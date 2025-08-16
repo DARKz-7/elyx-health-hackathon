@@ -78,6 +78,20 @@ class Metric:
     source: str
 
     # --- Model Validation Utilities ---
+def validate_diagnostic_tests(tests):
+    for test in tests:
+        validate_diagnostic_test(test)
+    print("All diagnostic tests validated successfully.")
+
+def validate_plans(plans):
+    for plan in plans:
+        validate_plan(plan)
+    print("All plans validated successfully.")
+
+def validate_interventions(interventions):
+    for inter in interventions:
+        validate_intervention(inter)
+    print("All interventions validated successfully.")
 
 def validate_member(member):
     assert member.name, "Name cannot be empty"
@@ -111,4 +125,10 @@ def validate_intervention(inter):
     assert inter.type, "Intervention must have a type"
     assert inter.status in ["active", "completed", "changed"], "Status must be active, completed, or changed"
     print(f"Intervention ID {inter.id} validated.")
+def validate_metrics(metrics):
+    for metric in metrics:
+        assert metric.metric_type, f"Metric ID {metric.id} missing type"
+        assert metric.value is not None, f"Metric ID {metric.id} missing value"
+        assert metric.date, f"Metric ID {metric.id} missing date"
+    print("All metrics validated successfully.")
 
