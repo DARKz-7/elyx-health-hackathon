@@ -76,3 +76,24 @@ class Metric:
     value: float
     date: datetime
     source: str
+
+    # --- Model Validation Utilities ---
+
+def validate_member(member):
+    assert member.name, "Name cannot be empty"
+    assert isinstance(member.health_goals, list), "Health goals should be a list"
+    assert isinstance(member.travel_hubs, list), "Travel hubs should be a list"
+    print(f"Member {member.name} validated successfully.")
+
+def validate_team(team):
+    for tm in team:
+        assert tm.role, f"Team member {tm.name} must have a role"
+    print("All team members validated successfully.")
+
+def validate_conversation(convs):
+    for conv in convs:
+        assert conv.message, "All conversations must have non-empty messages"
+        assert conv.sender, f"Conversation ID {conv.id} has empty sender"
+        assert conv.recipient, f"Conversation ID {conv.id} has empty recipient"
+    print("All conversations validated successfully.")
+
