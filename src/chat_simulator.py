@@ -1,43 +1,11 @@
-from datetime import datetime
-from models import Member, TeamMember, DiagnosticTest
+from datetime import datetime, timedelta
+from models import Member, TeamMember, DiagnosticTest, Metric
 from data_io import save_to_csv, save_to_json
 from scenario_simulator import simulate_conversations, simulate_advanced_conversations
 from model_validation_demo import (
-    validate_member, validate_team, validate_conversation, validate_diagnostic_tests
-)
-from models import (
     validate_member, validate_team, validate_conversation,
-    validate_diagnostic_tests, validate_plans, validate_interventions
+    validate_diagnostic_tests, validate_metrics
 )
-from models import Metric
-from datetime import datetime, timedelta
-
-def create_metrics(member, start_date, num_weeks):
-    metrics = []
-    for week in range(num_weeks):
-        dt = start_date + timedelta(weeks=week)
-        # Simulate realistic values by week
-        metrics.append(
-            Metric(
-                id=week+1,
-                member_id=member.id,
-                metric_type="ExerciseMinutes",
-                value=150 + week * 2,  # e.g., increasing weekly activity
-                date=dt,
-                source="manual_log"
-            )
-        )
-        metrics.append(
-            Metric(
-                id=100+week+1,
-                member_id=member.id,
-                metric_type="SymptomFatigueScore",
-                value=max(0, 7 - week * 0.3),  # e.g., decreasing fatigue
-                date=dt,
-                source="questionnaire"
-            )
-        )
-    return metrics
 
 def create_team():
     return [
@@ -91,6 +59,32 @@ def create_diagnostic_tests(member):
         )
     ]
 
+def create_metrics(member, start_date, num_weeks):
+    metrics = []
+    for week in range(num_weeks):
+        dt = start_date + timedelta(weeks=week)
+        metrics.append(
+            Metric(
+                id=week+1,
+                member_id=member.id,
+                metric_type="ExerciseMinutes",
+                value=150 + week * 2,  # increasing activity
+                date=dt,
+                source="manual_log"
+            )
+        )
+        metrics.append(
+            Metric(
+                id=100 + week + 1,
+                member_id=member.id,
+                metric_type="SymptomFatigueScore",
+                value=max(0, 7 - week * 0.3),  # decreasing fatigue
+                date=dt,
+                source="questionnaire"
+            )
+        )
+    return metrics
+
 def main():
     team = create_team()
     member = create_member()
@@ -101,22 +95,28 @@ def main():
     conversations.sort(key=lambda c: c.timestamp)
 
     diagnostic_tests = create_diagnostic_tests(member)
+    metrics = create_metrics(member, start_date, num_weeks=32)  # approx. 8 months
 
     # Run validations
     validate_member(member)
     validate_team(team)
     validate_conversation(conversations)
     validate_diagnostic_tests(diagnostic_tests)
+    validate_metrics(metrics)
 
-    # Save data to CSV and JSON
-    save_to_csv('data/conversations.csv', conversations,
+    # Save data
+    save_to_csv('conversations.csv', conversations,
                 ['id', 'timestamp', 'sender', 'sender_role', 'recipient', 'message',
                  'message_type', 'related_event', 'attachments'])
-    save_to_json('data/conversations.json', conversations)
+    save_to_json('conversations.json', conversations)
 
-    save_to_csv('data/diagnostics.csv', diagnostic_tests,
+    save_to_csv('diagnostics.csv', diagnostic_tests,
                 ['id', 'member_id', 'test_type', 'test_date', 'results', 'ordered_by', 'summary'])
-    save_to_json('data/diagnostics.json', diagnostic_tests)
+    save_to_json('diagnostics.json', diagnostic_tests)
+
+    save_to_csv('metrics.csv', metrics,
+                ['id', 'member_id', 'metric_type', 'value', 'date', 'source'])
+    save_to_json('metrics.json', metrics)
 
     # Print chat log
     for conv in conversations:
