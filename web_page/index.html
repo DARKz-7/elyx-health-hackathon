@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title>Elyx Member Journey - Advanced Viewer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Elyx Member Journey</h1>
+    <p>WhatsApp-style visualization with search, highlight, grouping, and download</p>
+  </header>
+  <div id="controls">
+    <input id="searchInput" type="text" placeholder="Search by sender or text..." />
+    <input id="dateInput" type="date" style="margin-left:15px;" />
+    <button id="downloadBtn">Download Visible Chat</button>
+  </div>
+  <div id="chat-container"></div>
+
+  <script>
+    let allMessages = [];
+    let chatDiv = document.getElementById('chat-container');
+
+    // Render the chat messages
+    function renderMessages(msgs) {
+      chatDiv.innerHTML = '';
+      let lastGroup = "";
+      msgs.forEach(msg => {
+        // Group by date header
+        const thisGroup = new Date(msg.timestamp).toLocaleDateString();
+        if (thisGroup !== lastGroup) {
+          const header = document.createElement('div');
+          header.className = 'date-header';
+          header.textContent = thisGroup;
+          chatDiv.appendChild(header);
+          lastGroup = thisGroup;
+        }
+        // Row
+        const row = document.createElement('div');
+        row.className = 'chat-row ' + (msg.sender_role.toLowerCase() === 'member' ? 'member' : 'team');
+
+        // Avatar initials
+        const avatar = document.createElement('div');
+        avatar.className = 'avatar';
+        avatar.textContent = msg.sender.split(' ').map(w => w[0]).join('').toUpperCase().slice(0,2);
+
+        // Bubble
+        const bubble = document.createElement('div');
+        bubble.classList.add('bubble', msg.sender_role.toLowerCase() === 'member' ? 'member' : 'team');
+        if(msg.message_type) bubble.classList.add(msg.message_type); // highlight types
+        bubble.innerHTML = `
+          <div class="sender">
+            <span>${msg.sender}</span>
+            <span class="role">(${msg.sender_role})</span>
+          </div>
+          <div>${msg.message}</div>
+          ${msg.attachments && msg.attachments.length ? `<div class="attachments">${msg.attachments.map(a => '📎 ' + a).join(' ')}</div>` : ''}
+          <div class="timestamp">${new Date(msg.timestamp).toLocaleString()}</div>
+        `;
+        if(msg.sender_role.toLowerCase() === 'member') {
+          row.appendChild(avatar);
+          row.appendChild(bubble);
+        } else {
+          row.appendChild(bubble);
+          row.appendChild(avatar);
+        }
+        chatDiv.appendChild(row);
+      });
+    }
+
+    // Load chat data
+    fetch('../data/conversations.json')
+      .then(response => response.json())
+      .then(convos => {
+        allMessages = convos;
+        renderMessages(allMessages);
+      });
+
+    // Search filter
+    document.getElementById('searchInput').addEventListener('input', function() {
+      const q = this.value.toLowerCase();
+      let filtered = allMessages.filter(msg =>
+        msg.sender.toLowerCase().includes(q) ||
+        msg.message.toLowerCase().includes(q)
+      );
+      // If date is picked filter again
+      const dateVal = document.getElementById('dateInput').value;
+      if(dateVal) {
+        filtered = filtered.filter(msg => msg.timestamp.startsWith(dateVal));
+      }
+      renderMessages(filtered);
+    });
+
+    // Date group filter
+    document.getElementById('dateInput').addEventListener('change', function() {
+      const dq = this.value;
+      let filtered = allMessages;
+      if(dq) {
+        filtered = filtered.filter(msg => msg.timestamp.startsWith(dq));
+      }
+      // Also filter by search query if present
+      const searchVal = document.getElementById('searchInput').value.toLowerCase();
+      if(searchVal) {
+        filtered = filtered.filter(msg =>
+          msg.sender.toLowerCase().includes(searchVal) ||
+          msg.message.toLowerCase().includes(searchVal)
+        );
+      }
+      renderMessages(filtered);
+    });
+
+    // Download button
+    document.getElementById('downloadBtn').onclick = () => {
+      const text = Array.from(chatDiv.querySelectorAll('.bubble'))
+        .map(bub => bub.innerText.replace(/\n\s*\n/g, '\n')).join('\n\n');
+      const blob = new Blob([text], {type: 'text/plain'});
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = "elyx-chat-report.txt";
+      link.click();
+    };
+  </script>
+</body>
+</html>
