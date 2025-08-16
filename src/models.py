@@ -125,4 +125,10 @@ def validate_intervention(inter):
     assert inter.type, "Intervention must have a type"
     assert inter.status in ["active", "completed", "changed"], "Status must be active, completed, or changed"
     print(f"Intervention ID {inter.id} validated.")
+def validate_metrics(metrics):
+    for metric in metrics:
+        assert metric.metric_type, f"Metric ID {metric.id} missing type"
+        assert metric.value is not None, f"Metric ID {metric.id} missing value"
+        assert metric.date, f"Metric ID {metric.id} missing date"
+    print("All metrics validated successfully.")
 

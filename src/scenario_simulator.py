@@ -126,3 +126,36 @@ def simulate_advanced_conversations(member, team, start_date):
         message_type="update"
     ))
     return conversations
+from datetime import timedelta
+from models import Conversation
+
+def simulate_conversations(member, team, start_date, plans, interventions, metrics):
+    conversations = []
+
+    # Existing or initial conversation events
+    # Example initial greeting
+    conversations.append(
+        Conversation(
+            id=1,
+            timestamp=start_date,
+            sender=member.name,
+            sender_role="Member",
+            recipient="Ruby",
+            message="Hi Ruby!",
+            message_type="query"
+        )
+    )
+    
+    # Simulate weekly check-ins or conversations over a timeline (e.g., 8 months)
+    num_weeks = 32  # approx. 8 months
+
+    for week in range(num_weeks):
+        current_date = start_date + timedelta(weeks=week)
+
+        # Example: Check relevant metric for this week
+        week_metric = next((m for m in metrics if m.date.isocalendar()[1] == current_date.isocalendar()[1]), None)
+
+        if week_metric and week_metric.metric_type == "ExerciseMinutes":
+            # If exercise minutes are below threshold, create/update intervention and add a chat message
+            if week_metric.value < 120:
+                # Update intervention status and details here (assumed done outside or prior)

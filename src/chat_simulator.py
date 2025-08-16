@@ -9,6 +9,35 @@ from models import (
     validate_member, validate_team, validate_conversation,
     validate_diagnostic_tests, validate_plans, validate_interventions
 )
+from models import Metric
+from datetime import datetime, timedelta
+
+def create_metrics(member, start_date, num_weeks):
+    metrics = []
+    for week in range(num_weeks):
+        dt = start_date + timedelta(weeks=week)
+        # Simulate realistic values by week
+        metrics.append(
+            Metric(
+                id=week+1,
+                member_id=member.id,
+                metric_type="ExerciseMinutes",
+                value=150 + week * 2,  # e.g., increasing weekly activity
+                date=dt,
+                source="manual_log"
+            )
+        )
+        metrics.append(
+            Metric(
+                id=100+week+1,
+                member_id=member.id,
+                metric_type="SymptomFatigueScore",
+                value=max(0, 7 - week * 0.3),  # e.g., decreasing fatigue
+                date=dt,
+                source="questionnaire"
+            )
+        )
+    return metrics
 
 def create_team():
     return [
