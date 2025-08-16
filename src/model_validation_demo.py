@@ -14,6 +14,14 @@ def validate_plans(plans):
         assert plan.summary, f"Plan ID {plan.id} missing summary"
         assert isinstance(plan.interventions, list), f"Plan ID {plan.id} interventions must be list"
     print("All plans validated successfully.")
+    
+def validate_diagnostic_tests(tests):
+    for test in tests:
+        assert test.test_type, f"Diagnostic test {test.id} type cannot be empty"
+        assert test.test_date, f"Diagnostic test {test.id} date missing"
+        assert isinstance(test.results, dict), f"Diagnostic test {test.id} results must be a dictionary"
+        assert test.summary, f"Diagnostic test {test.id} summary missing"
+    print("All diagnostic tests validated successfully.")
 
 member = Member(
     id=1,
