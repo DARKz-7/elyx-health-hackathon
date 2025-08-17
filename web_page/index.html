@@ -5,155 +5,134 @@
   <title>Elyx Member Journey - Advanced Viewer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="style.css" />
-  <style>
-    .bubble.suggestion {
-      border-left: 6px solid #ffa726;
-      background: #fff8e1;
-      transition: background 0.3s, border 0.3s;
-    }
-    .explanation-text {
-      transition: opacity 0.25s;
-      opacity: 0;
-      max-height: 0;
-      overflow: hidden;
-    }
-    .explanation-text.open {
-      opacity: 1;
-      max-height: 200px;
-      margin-top: 6px;
-      transition: opacity 0.3s, max-height 0.3s, margin-top 0.3s;
-    }
-  </style>
 </head>
 <body>
-  <nav>
+  <nav style="margin:1em; text-align:center;">
     <a href="index.html">Chat</a> |
     <a href="metrics.html">Metrics</a> |
     <a href="plans.html">Plan</a>
   </nav>
+
   <header>
     <h1>Elyx Member Journey</h1>
     <p>WhatsApp-style visualization with search, highlight, grouping, and download</p>
   </header>
+
   <div id="controls">
     <input type="text" id="search-input" placeholder="Search by sender or text..." />
     <input type="date" id="date-filter" />
     <button id="download-chat">Download Visible Chat</button>
   </div>
+
   <div id="chat-container"></div>
+
   <script>
     let conversations = [];
-    // Explain mapping for doctor suggestions if explanation_id exists
+
+    // Explanation texts keyed by explanation_id
     const explanationAPI = {
-      rec1: "Research shows daily step goals over 8,000 reduce cardiovascular risk. Your HRV readings suggest you're likely to benefit from increased light activity.",
-      rec2: "Taking antihypertensive medication in the evening can optimize 24-hour blood pressure control and support restorative sleep (see Smolensky et al, 2020)."
-      // Add/remap others as desired
+      pt_plan_update: "Exercise programs are adjusted based on progress to maximize improvement while preventing injury.",
+      report_1: "Autonomic dysfunction explains symptoms; we require records to rule out other causes and tailor treatment.",
+      travel_workout: "This circuit adapts your exercise for limited hotel space and equipment, maintaining your routine while traveling.",
+      concierge_update: "The concierge facilitates communication and coordination to ensure member’s concerns are addressed promptly.",
+      reminder_diagnostic_panel: "Regular diagnostic panels every 3 months allow tracking health progress and adjusting care plans effectively."
+      // Add more mappings here if you expand your JSON
     };
-    function fetchExplanation(explanationId) {
+
+    async function fetchExplanation(id) {
       return new Promise((resolve) => {
         setTimeout(() => {
-          resolve(explanationAPI[explanationId] || "Detailed rationale not found.");
-        }, 200);
+          resolve(explanationAPI[id] || "No detailed explanation available.");
+        }, 150);
       });
     }
-    async function loadAndRenderChats() {
-      try {
-        const response = await fetch('../data/conversations.json');
 
-        conversations = await response.json();
-        conversations.forEach(c => {
-          if (typeof c.timestamp === "string") {
-            c.timestamp = new Date(c.timestamp);
-          }
-        });
-        renderChats(conversations);
-      } catch (error) {
-        document.getElementById('chat-container').innerHTML = '<div style="color:red;">Could not load conversation data.</div>';
-        console.error(error);
-      }
+    async function loadChats() {
+      const res = await fetch('data/conversations.json');  // Path updated to 'data' folder
+      const data = await res.json();
+      conversations = data.map(c => ({ ...c, timestamp: new Date(c.timestamp) }));
+      renderChats(conversations);
     }
+
     async function renderChats(filteredChats) {
       const container = document.getElementById('chat-container');
       container.innerHTML = '';
+
       for (let conv of filteredChats) {
         const bubble = document.createElement('div');
         bubble.classList.add('bubble');
-        if (conv.sender_role && ["Doctor", "PT", "Concierge", "Coach"].includes(conv.sender_role)) {
+
+        if (conv.sender_role && ["Doctor", "PT", "Concierge", "Coach", "Medical Strategist"].includes(conv.sender_role)) {
           bubble.classList.add('team');
         } else {
           bubble.classList.add('member');
         }
+
         if (conv.explanation_id) {
           bubble.classList.add('suggestion');
         }
+
         const timeStr = conv.timestamp.toLocaleString('en-GB', {
-          day: '2-digit', month: '2-digit', year: 'numeric',
-          hour: '2-digit', minute: '2-digit'
+          day:'2-digit', month:'2-digit', year:'numeric',
+          hour:'2-digit', minute:'2-digit'
         });
+
         bubble.innerHTML = `
-          <div class="sender"><strong>${conv.sender}</strong> <span class="role">(${conv.sender_role || ''})</span></div>
+          <div class="sender">${conv.sender} <span class="role">(${conv.sender_role || ''})</span></div>
           <div class="message-text">${conv.message}</div>
           <div class="timestamp">${timeStr}</div>
         `;
+
         if (conv.explanation_id) {
           const btn = document.createElement('button');
           btn.textContent = "Why?";
           btn.className = 'why-button';
+
           const explanationDiv = document.createElement('div');
           explanationDiv.className = 'explanation-text';
+
           let loaded = false;
           btn.onclick = async () => {
             document.querySelectorAll('.explanation-text.open').forEach(el => el.classList.remove('open'));
+
             if (!loaded) {
-              explanationDiv.textContent = "Loading details...";
+              explanationDiv.textContent = "Loading explanation...";
               explanationDiv.classList.add('open');
-              const result = await fetchExplanation(conv.explanation_id);
-              explanationDiv.textContent = result;
+              explanationDiv.textContent = await fetchExplanation(conv.explanation_id);
               loaded = true;
+            } else {
+              explanationDiv.classList.toggle('open');
             }
-            explanationDiv.classList.toggle('open');
           };
+
           bubble.appendChild(btn);
           bubble.appendChild(explanationDiv);
         }
+
         container.appendChild(bubble);
       }
     }
+
     function filterChats() {
       const searchVal = document.getElementById('search-input').value.toLowerCase();
       const dateVal = document.getElementById('date-filter').value;
       let filtered = conversations;
-      if (searchVal) {
-        filtered = filtered.filter(c =>
-          (c.sender && c.sender.toLowerCase().includes(searchVal)) ||
-          (c.message && c.message.toLowerCase().includes(searchVal))
-        );
-      }
-      if (dateVal) {
-        filtered = filtered.filter(c =>
-          c.timestamp.toISOString().slice(0,10) === dateVal
-        );
-      }
+
+      if (searchVal) filtered = filtered.filter(c =>
+        (c.sender && c.sender.toLowerCase().includes(searchVal)) ||
+        (c.message && c.message.toLowerCase().includes(searchVal))
+      );
+
+      if (dateVal) filtered = filtered.filter(c =>
+        c.timestamp.toISOString().slice(0,10) === dateVal
+      );
+
       renderChats(filtered);
     }
+
     function downloadChat() {
-      // Download currently visible chat (filtered)
-      const searchVal = document.getElementById('search-input').value.toLowerCase();
-      const dateVal = document.getElementById('date-filter').value;
-      let filtered = conversations;
-      if (searchVal) {
-        filtered = filtered.filter(c =>
-          (c.sender && c.sender.toLowerCase().includes(searchVal)) ||
-          (c.message && c.message.toLowerCase().includes(searchVal))
-        );
-      }
-      if (dateVal) {
-        filtered = filtered.filter(c =>
-          c.timestamp.toISOString().slice(0,10) === dateVal
-        );
-      }
-      const dataStr = JSON.stringify(filtered, null, 2);
-      const blob = new Blob([dataStr], { type: "application/json" });
+      const dataStr = JSON.stringify(conversations, null, 2);
+      const blob = new Blob([dataStr], {type: "application/json"});
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
@@ -162,10 +141,14 @@
       a.click();
       document.body.removeChild(a);
     }
+
     document.getElementById('search-input').addEventListener('input', filterChats);
     document.getElementById('date-filter').addEventListener('change', filterChats);
     document.getElementById('download-chat').addEventListener('click', downloadChat);
-    loadAndRenderChats();
+
+    loadChats();
   </script>
 </body>
 </html>
+
+
