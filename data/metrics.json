@@ -510,5 +510,36 @@
     "value": 4.4,
     "date": "2025-08-20T09:00:00",
     "source": "SelfReport"
-  }
+  },
+  {
+  "consult_hours": {
+    "Dr. Warren": 15,
+    "Rachel": 18,
+    "Ruby": 24
+  },
+  "plan_adherence_percent": 52,
+  "test_panels_count": 3,
+  "test_panel_dates": ["2025-01-15", "2025-04-15", "2025-07-15"],
+  "adherence_events": [
+    {
+      "date": "2025-01-29",
+      "type": "Adherence drop",
+      "reason": "Travel",
+      "new_plan": "Hotel gym circuit"
+    },
+    {
+      "date": "2025-02-12",
+      "type": "Adherence drop",
+      "reason": "Low exercise log",
+      "new_plan": "Adjusted progressive goals"
+    },
+    {
+      "date": "2025-04-16",
+      "type": "Adherence drop",
+      "reason": "Fatigue",
+      "new_plan": "Lower intensity"
+    }
+  ]
+}
+
 ]

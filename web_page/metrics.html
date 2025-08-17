@@ -5,6 +5,34 @@
   <title>Elyx Health — Metrics</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    .summary-cards {
+      display: flex; gap: 32px; margin: 24px auto; max-width: 750px;
+      justify-content: space-around;
+    }
+    .card {
+      background: #f5f6fa;
+      border-radius: 8px;
+      padding: 16px 24px;
+      box-shadow: 0 2px 8px #d0d0ff20;
+      font-size: 1.15em;
+      min-width: 170px;
+      text-align: center;
+    }
+    table {
+      width: 100%; border-collapse: collapse; margin-top: 40px;
+    }
+    th, td {
+      padding: .5em;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background: #e9eafd;
+      color: #3c3cff;
+    }
+  </style>
 </head>
 <body>
   <nav>
@@ -18,14 +46,27 @@
     <p style="color:#444;">Visualize health journey KPIs like HRV, ApoB, Sleep and more, for each member</p>
   </header>
 
+  <!-- Summary Cards -->
+  <section class="summary-cards">
+    <div class="card" id="adherence-card"></div>
+    <div class="card" id="consult-card"></div>
+    <div class="card" id="testfreq-card"></div>
+  </section>
+
+  <!-- Plan Adherence Trend Chart -->
   <section style="width:95%;max-width:750px;margin:auto;">
-    <!-- You can replace this with a table or embed a chart as needed -->
-    <table style="width:100%;border-collapse:collapse;">
-      <tr style="background:#e9eafd;color:#3c3cff;">
-        <th style="padding:.5em;">Metric</th>
-        <th style="padding:.5em;">Value</th>
-        <th style="padding:.5em;">Date</th>
-        <th style="padding:.5em;">Source</th>
+    <h3>Plan Adherence Trend</h3>
+    <canvas id="adherenceChart" width="400" height="120"></canvas>
+  </section>
+
+  <!-- Metrics Table -->
+  <section style="width:95%;max-width:750px;margin:auto;">
+    <table>
+      <tr>
+        <th>Metric</th>
+        <th>Value</th>
+        <th>Date</th>
+        <th>Source</th>
       </tr>
       <tr>
         <td>HRV</td>
@@ -45,8 +86,60 @@
         <td>2025-08-14</td>
         <td>Whoop Band</td>
       </tr>
-      <!-- Add more rows or use JavaScript to load real metrics from JSON -->
     </table>
   </section>
+
+  <script>
+    // Sample data from metrics.json for additional stats
+    const metrics = {
+      consult_hours: {
+        "Dr. Warren": 15,
+        "Rachel": 18,
+        "Ruby": 24
+      },
+      plan_adherence_percent: 52,
+      test_panels_count: 3,
+      test_panel_dates: ["2025-01-15", "2025-04-15", "2025-07-15"]
+    };
+
+    // Render Summary Cards
+    document.getElementById('adherence-card').innerHTML =
+      `<strong>Plan Adherence</strong><br>${metrics.plan_adherence_percent}%`;
+
+    let consultsHTML = '';
+    for (const expert in metrics.consult_hours) {
+      consultsHTML += `${expert}: ${metrics.consult_hours[expert]} hr<br>`;
+    }
+    document.getElementById('consult-card').innerHTML =
+      `<strong>Consult Hours</strong><br>${consultsHTML}`;
+
+    document.getElementById('testfreq-card').innerHTML =
+      `<strong>Diagnostic Panels</strong><br>${metrics.test_panels_count} completed<br>
+       <small>${metrics.test_panel_dates.join(', ')}</small>`;
+
+    // Chart.js: Plan adherence over months (sample static data)
+    const adherenceTrend = {
+      labels: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug"],
+      data: [48, 51, 52, 49, 53, 54, 55, 56]
+    };
+    new Chart(document.getElementById('adherenceChart'), {
+      type: 'line',
+      data: {
+        labels: adherenceTrend.labels,
+        datasets: [{
+          label: "Plan Adherence (%)",
+          data: adherenceTrend.data,
+          borderColor: "#594bf8",
+          backgroundColor: "rgba(89,75,248,0.2)",
+          fill: true,
+          tension: 0.3
+        }]
+      },
+      options: {
+        scales: { y: { min: 0, max: 100 } },
+        plugins: { legend: { labels: { font: { size: 14 } } } }
+      }
+    });
+  </script>
 </body>
 </html>
