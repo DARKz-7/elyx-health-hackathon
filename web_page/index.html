@@ -48,7 +48,7 @@
     }
 
     async function loadChats() {
-      const res = await fetch('data/conversations.json');  // Path updated to 'data' folder
+      const res = await fetch('../data/conversations.json');  // Path updated to 'data' folder
       const data = await res.json();
       conversations = data.map(c => ({ ...c, timestamp: new Date(c.timestamp) }));
       renderChats(conversations);

@@ -30,8 +30,7 @@
     "message": "Time for your exercise program update for week 1. We'll adapt based on your progress.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "pt_plan_update"
+    "attachments": []
   },
   {
     "id": 2,
@@ -42,8 +41,7 @@
     "message": "Thank you, Rohan. Are you experiencing other symptoms? I'll flag Dr. Warren.",
     "message_type": "update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "concierge_update"
+    "attachments": []
   },
   {
     "id": 3,
@@ -54,8 +52,7 @@
     "message": "Submission reviewed. Strongly suggests autonomic dysfunction. We'll need medical records.",
     "message_type": "report",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "report_1"
+    "attachments": []
   },
   {
     "id": 1002,
@@ -73,7 +70,7 @@
     "timestamp": "2025-01-17T09:00:00",
     "sender": "Rohan Patel",
     "sender_role": "Member",
-    "recipient": "Ruby",
+    "recipient": "Advik",
     "message": "Week 1, Query 1: Read about Omega-3. Should I supplement?",
     "message_type": "query",
     "related_event": {},
@@ -88,8 +85,7 @@
     "message": "Here is a hotel gym circuit for your travel week. Let me know if any equipment is missing.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "travel_workout"
+    "attachments": []
   },
   {
     "id": 1004,
@@ -100,8 +96,7 @@
     "message": "Time for your exercise program update for week 3. We'll adapt based on your progress.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "pt_plan_update"
+    "attachments": []
   },
   {
     "id": 1007,
@@ -112,8 +107,7 @@
     "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "pt_plan_update"
+    "attachments": []
   },
   {
     "id": 1005,
@@ -131,7 +125,7 @@
     "timestamp": "2025-01-31T09:00:00",
     "sender": "Rohan Patel",
     "sender_role": "Member",
-    "recipient": "Dr. Warren",
+    "recipient": "Neel",
     "message": "Week 1, Query 2: Read about Omega-3. Should I supplement?",
     "message_type": "query",
     "related_event": {},
@@ -146,23 +140,10 @@
     "message": "Here is a hotel gym circuit for your travel week. Let me know if any equipment is missing.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "travel_workout"
+    "attachments": []
   },
   {
     "id": 1008,
-    "timestamp": "2025-02-05T19:00:00",
-    "sender": "Rachel",
-    "sender_role": "PT",
-    "recipient": "Rohan Patel",
-    "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
-    "message_type": "plan_update",
-    "related_event": {},
-    "attachments": [],
-    "explanation_id": "pt_plan_update"
-  },
-  {
-    "id": 1009,
     "timestamp": "2025-02-12T09:00:00",
     "sender": "Rachel",
     "sender_role": "PT",
@@ -170,23 +151,10 @@
     "message": "Time for your exercise program update for week 5. We'll adapt based on your progress.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "pt_plan_update"
+    "attachments": []
   },
   {
-    "id": 1012,
-    "timestamp": "2025-02-12T19:00:00",
-    "sender": "Rachel",
-    "sender_role": "PT",
-    "recipient": "Rohan Patel",
-    "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
-    "message_type": "plan_update",
-    "related_event": {},
-    "attachments": [],
-    "explanation_id": "pt_plan_update"
-  },
-  {
-    "id": 1010,
+    "id": 1009,
     "timestamp": "2025-02-13T09:00:00",
     "sender": "Rohan Patel",
     "sender_role": "Member",
@@ -197,7 +165,18 @@
     "attachments": []
   },
   {
-    "id": 1011,
+    "id": 7,
+    "timestamp": "2025-02-14T09:00:00",
+    "sender": "Rohan Patel",
+    "sender_role": "Member",
+    "recipient": "Dr. Warren",
+    "message": "Week 1, Query 3: Read about Omega-3. Should I supplement?",
+    "message_type": "query",
+    "related_event": {},
+    "attachments": []
+  },
+  {
+    "id": 1010,
     "timestamp": "2025-02-14T09:00:00",
     "sender": "Rachel",
     "sender_role": "PT",
@@ -205,11 +184,10 @@
     "message": "Here is a hotel gym circuit for your travel week. Let me know if any equipment is missing.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "travel_workout"
+    "attachments": []
   },
   {
-    "id": 1013,
+    "id": 1011,
     "timestamp": "2025-02-19T19:00:00",
     "sender": "Rachel",
     "sender_role": "PT",
@@ -217,11 +195,10 @@
     "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "pt_plan_update"
+    "attachments": []
   },
   {
-    "id": 1014,
+    "id": 1012,
     "timestamp": "2025-02-26T09:00:00",
     "sender": "Rachel",
     "sender_role": "PT",
@@ -229,11 +206,21 @@
     "message": "Time for your exercise program update for week 7. We'll adapt based on your progress.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "pt_plan_update"
+    "attachments": []
   },
   {
     "id": 1015,
+    "timestamp": "2025-02-26T19:00:00",
+    "sender": "Rachel",
+    "sender_role": "PT",
+    "recipient": "Rohan Patel",
+    "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
+    "message_type": "plan_update",
+    "related_event": {},
+    "attachments": []
+  },
+  {
+    "id": 1013,
     "timestamp": "2025-02-27T09:00:00",
     "sender": "Rohan Patel",
     "sender_role": "Member",
@@ -255,7 +242,7 @@
     "attachments": []
   },
   {
-    "id": 1016,
+    "id": 1014,
     "timestamp": "2025-02-28T09:00:00",
     "sender": "Rachel",
     "sender_role": "PT",
@@ -263,8 +250,18 @@
     "message": "Here is a hotel gym circuit for your travel week. Let me know if any equipment is missing.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "travel_workout"
+    "attachments": []
+  },
+  {
+    "id": 1016,
+    "timestamp": "2025-03-05T19:00:00",
+    "sender": "Rachel",
+    "sender_role": "PT",
+    "recipient": "Rohan Patel",
+    "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
+    "message_type": "plan_update",
+    "related_event": {},
+    "attachments": []
   },
   {
     "id": 1017,
@@ -275,8 +272,7 @@
     "message": "Time for your exercise program update for week 9. We'll adapt based on your progress.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "pt_plan_update"
+    "attachments": []
   },
   {
     "id": 1020,
@@ -287,8 +283,7 @@
     "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "pt_plan_update"
+    "attachments": []
   },
   {
     "id": 1018,
@@ -321,23 +316,10 @@
     "message": "Here is a hotel gym circuit for your travel week. Let me know if any equipment is missing.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "travel_workout"
+    "attachments": []
   },
   {
     "id": 1021,
-    "timestamp": "2025-03-19T19:00:00",
-    "sender": "Rachel",
-    "sender_role": "PT",
-    "recipient": "Rohan Patel",
-    "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
-    "message_type": "plan_update",
-    "related_event": {},
-    "attachments": [],
-    "explanation_id": "pt_plan_update"
-  },
-  {
-    "id": 1022,
     "timestamp": "2025-03-26T09:00:00",
     "sender": "Rachel",
     "sender_role": "PT",
@@ -345,11 +327,21 @@
     "message": "Time for your exercise program update for week 11. We'll adapt based on your progress.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "pt_plan_update"
+    "attachments": []
   },
   {
-    "id": 1023,
+    "id": 1024,
+    "timestamp": "2025-03-26T19:00:00",
+    "sender": "Rachel",
+    "sender_role": "PT",
+    "recipient": "Rohan Patel",
+    "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
+    "message_type": "plan_update",
+    "related_event": {},
+    "attachments": []
+  },
+  {
+    "id": 1022,
     "timestamp": "2025-03-27T09:00:00",
     "sender": "Rohan Patel",
     "sender_role": "Member",
@@ -364,14 +356,14 @@
     "timestamp": "2025-03-28T09:00:00",
     "sender": "Rohan Patel",
     "sender_role": "Member",
-    "recipient": "Rachel",
+    "recipient": "Neel",
     "message": "Week 2, Query 2: Read about Omega-3. Should I supplement?",
     "message_type": "query",
     "related_event": {},
     "attachments": []
   },
   {
-    "id": 1024,
+    "id": 1023,
     "timestamp": "2025-03-28T09:00:00",
     "sender": "Rachel",
     "sender_role": "PT",
@@ -379,8 +371,7 @@
     "message": "Here is a hotel gym circuit for your travel week. Let me know if any equipment is missing.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "travel_workout"
+    "attachments": []
   },
   {
     "id": 1025,
@@ -391,8 +382,7 @@
     "message": "Time for your exercise program update for week 13. We'll adapt based on your progress.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "pt_plan_update"
+    "attachments": []
   },
   {
     "id": 1028,
@@ -403,8 +393,7 @@
     "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "pt_plan_update"
+    "attachments": []
   },
   {
     "id": 1026,
@@ -422,7 +411,7 @@
     "timestamp": "2025-04-11T09:00:00",
     "sender": "Rohan Patel",
     "sender_role": "Member",
-    "recipient": "Advik",
+    "recipient": "Dr. Warren",
     "message": "Week 2, Query 3: Read about Omega-3. Should I supplement?",
     "message_type": "query",
     "related_event": {},
@@ -437,8 +426,7 @@
     "message": "Here is a hotel gym circuit for your travel week. Let me know if any equipment is missing.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "travel_workout"
+    "attachments": []
   },
   {
     "id": 13,
@@ -449,23 +437,10 @@
     "message": "Reminder: Time for your full diagnostic panel this week.",
     "message_type": "reminder",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "reminder_diagnostic_panel"
+    "attachments": []
   },
   {
     "id": 1029,
-    "timestamp": "2025-04-16T19:00:00",
-    "sender": "Rachel",
-    "sender_role": "PT",
-    "recipient": "Rohan Patel",
-    "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
-    "message_type": "plan_update",
-    "related_event": {},
-    "attachments": [],
-    "explanation_id": "pt_plan_update"
-  },
-  {
-    "id": 1030,
     "timestamp": "2025-04-23T09:00:00",
     "sender": "Rachel",
     "sender_role": "PT",
@@ -473,11 +448,10 @@
     "message": "Time for your exercise program update for week 15. We'll adapt based on your progress.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "pt_plan_update"
+    "attachments": []
   },
   {
-    "id": 1033,
+    "id": 1032,
     "timestamp": "2025-04-23T19:00:00",
     "sender": "Rachel",
     "sender_role": "PT",
@@ -485,11 +459,10 @@
     "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "pt_plan_update"
+    "attachments": []
   },
   {
-    "id": 1031,
+    "id": 1030,
     "timestamp": "2025-04-24T09:00:00",
     "sender": "Rohan Patel",
     "sender_role": "Member",
@@ -504,14 +477,14 @@
     "timestamp": "2025-04-25T09:00:00",
     "sender": "Rohan Patel",
     "sender_role": "Member",
-    "recipient": "Carla",
+    "recipient": "Rachel",
     "message": "Week 2, Query 4: Read about Omega-3. Should I supplement?",
     "message_type": "query",
     "related_event": {},
     "attachments": []
   },
   {
-    "id": 1032,
+    "id": 1031,
     "timestamp": "2025-04-25T09:00:00",
     "sender": "Rachel",
     "sender_role": "PT",
@@ -519,23 +492,10 @@
     "message": "Here is a hotel gym circuit for your travel week. Let me know if any equipment is missing.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "travel_workout"
+    "attachments": []
   },
   {
-    "id": 1034,
-    "timestamp": "2025-04-30T19:00:00",
-    "sender": "Rachel",
-    "sender_role": "PT",
-    "recipient": "Rohan Patel",
-    "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
-    "message_type": "plan_update",
-    "related_event": {},
-    "attachments": [],
-    "explanation_id": "pt_plan_update"
-  },
-  {
-    "id": 1035,
+    "id": 1033,
     "timestamp": "2025-05-07T09:00:00",
     "sender": "Rachel",
     "sender_role": "PT",
@@ -543,11 +503,10 @@
     "message": "Time for your exercise program update for week 17. We'll adapt based on your progress.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "pt_plan_update"
+    "attachments": []
   },
   {
-    "id": 1038,
+    "id": 1036,
     "timestamp": "2025-05-07T19:00:00",
     "sender": "Rachel",
     "sender_role": "PT",
@@ -555,11 +514,10 @@
     "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "pt_plan_update"
+    "attachments": []
   },
   {
-    "id": 1036,
+    "id": 1034,
     "timestamp": "2025-05-08T09:00:00",
     "sender": "Rohan Patel",
     "sender_role": "Member",
@@ -570,7 +528,7 @@
     "attachments": []
   },
   {
-    "id": 1037,
+    "id": 1035,
     "timestamp": "2025-05-09T09:00:00",
     "sender": "Rachel",
     "sender_role": "PT",
@@ -578,11 +536,10 @@
     "message": "Here is a hotel gym circuit for your travel week. Let me know if any equipment is missing.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "travel_workout"
+    "attachments": []
   },
   {
-    "id": 1039,
+    "id": 1037,
     "timestamp": "2025-05-14T19:00:00",
     "sender": "Rachel",
     "sender_role": "PT",
@@ -590,11 +547,10 @@
     "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "pt_plan_update"
+    "attachments": []
   },
   {
-    "id": 1040,
+    "id": 1038,
     "timestamp": "2025-05-21T09:00:00",
     "sender": "Rachel",
     "sender_role": "PT",
@@ -602,11 +558,10 @@
     "message": "Time for your exercise program update for week 19. We'll adapt based on your progress.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "pt_plan_update"
+    "attachments": []
   },
   {
-    "id": 1041,
+    "id": 1039,
     "timestamp": "2025-05-22T09:00:00",
     "sender": "Rohan Patel",
     "sender_role": "Member",
@@ -617,7 +572,7 @@
     "attachments": []
   },
   {
-    "id": 1042,
+    "id": 1040,
     "timestamp": "2025-05-23T09:00:00",
     "sender": "Rachel",
     "sender_role": "PT",
@@ -625,23 +580,10 @@
     "message": "Here is a hotel gym circuit for your travel week. Let me know if any equipment is missing.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "travel_workout"
+    "attachments": []
   },
   {
-    "id": 1043,
-    "timestamp": "2025-05-28T19:00:00",
-    "sender": "Rachel",
-    "sender_role": "PT",
-    "recipient": "Rohan Patel",
-    "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
-    "message_type": "plan_update",
-    "related_event": {},
-    "attachments": [],
-    "explanation_id": "pt_plan_update"
-  },
-  {
-    "id": 1044,
+    "id": 1041,
     "timestamp": "2025-06-04T09:00:00",
     "sender": "Rachel",
     "sender_role": "PT",
@@ -649,11 +591,10 @@
     "message": "Time for your exercise program update for week 21. We'll adapt based on your progress.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "pt_plan_update"
+    "attachments": []
   },
   {
-    "id": 1045,
+    "id": 1042,
     "timestamp": "2025-06-05T09:00:00",
     "sender": "Rohan Patel",
     "sender_role": "Member",
@@ -664,7 +605,7 @@
     "attachments": []
   },
   {
-    "id": 1046,
+    "id": 1043,
     "timestamp": "2025-06-06T09:00:00",
     "sender": "Rachel",
     "sender_role": "PT",
@@ -672,11 +613,10 @@
     "message": "Here is a hotel gym circuit for your travel week. Let me know if any equipment is missing.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "travel_workout"
+    "attachments": []
   },
   {
-    "id": 1048,
+    "id": 1044,
     "timestamp": "2025-06-18T09:00:00",
     "sender": "Rachel",
     "sender_role": "PT",
@@ -684,23 +624,10 @@
     "message": "Time for your exercise program update for week 23. We'll adapt based on your progress.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "pt_plan_update"
+    "attachments": []
   },
   {
-    "id": 1051,
-    "timestamp": "2025-06-18T19:00:00",
-    "sender": "Rachel",
-    "sender_role": "PT",
-    "recipient": "Rohan Patel",
-    "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
-    "message_type": "plan_update",
-    "related_event": {},
-    "attachments": [],
-    "explanation_id": "pt_plan_update"
-  },
-  {
-    "id": 1049,
+    "id": 1045,
     "timestamp": "2025-06-19T09:00:00",
     "sender": "Rohan Patel",
     "sender_role": "Member",
@@ -711,7 +638,7 @@
     "attachments": []
   },
   {
-    "id": 1050,
+    "id": 1046,
     "timestamp": "2025-06-20T09:00:00",
     "sender": "Rachel",
     "sender_role": "PT",
@@ -719,11 +646,10 @@
     "message": "Here is a hotel gym circuit for your travel week. Let me know if any equipment is missing.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "travel_workout"
+    "attachments": []
   },
   {
-    "id": 1052,
+    "id": 1047,
     "timestamp": "2025-06-25T19:00:00",
     "sender": "Rachel",
     "sender_role": "PT",
@@ -731,11 +657,10 @@
     "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "pt_plan_update"
+    "attachments": []
   },
   {
-    "id": 1053,
+    "id": 1048,
     "timestamp": "2025-07-02T09:00:00",
     "sender": "Rachel",
     "sender_role": "PT",
@@ -743,23 +668,10 @@
     "message": "Time for your exercise program update for week 25. We'll adapt based on your progress.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "pt_plan_update"
+    "attachments": []
   },
   {
-    "id": 1056,
-    "timestamp": "2025-07-02T19:00:00",
-    "sender": "Rachel",
-    "sender_role": "PT",
-    "recipient": "Rohan Patel",
-    "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
-    "message_type": "plan_update",
-    "related_event": {},
-    "attachments": [],
-    "explanation_id": "pt_plan_update"
-  },
-  {
-    "id": 1054,
+    "id": 1049,
     "timestamp": "2025-07-03T09:00:00",
     "sender": "Rohan Patel",
     "sender_role": "Member",
@@ -770,7 +682,7 @@
     "attachments": []
   },
   {
-    "id": 1055,
+    "id": 1050,
     "timestamp": "2025-07-04T09:00:00",
     "sender": "Rachel",
     "sender_role": "PT",
@@ -778,23 +690,10 @@
     "message": "Here is a hotel gym circuit for your travel week. Let me know if any equipment is missing.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "travel_workout"
+    "attachments": []
   },
   {
-    "id": 1057,
-    "timestamp": "2025-07-09T19:00:00",
-    "sender": "Rachel",
-    "sender_role": "PT",
-    "recipient": "Rohan Patel",
-    "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
-    "message_type": "plan_update",
-    "related_event": {},
-    "attachments": [],
-    "explanation_id": "pt_plan_update"
-  },
-  {
-    "id": 1058,
+    "id": 1051,
     "timestamp": "2025-07-16T09:00:00",
     "sender": "Rachel",
     "sender_role": "PT",
@@ -802,11 +701,10 @@
     "message": "Time for your exercise program update for week 27. We'll adapt based on your progress.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "pt_plan_update"
+    "attachments": []
   },
   {
-    "id": 1059,
+    "id": 1052,
     "timestamp": "2025-07-17T09:00:00",
     "sender": "Rohan Patel",
     "sender_role": "Member",
@@ -817,7 +715,7 @@
     "attachments": []
   },
   {
-    "id": 1060,
+    "id": 1053,
     "timestamp": "2025-07-18T09:00:00",
     "sender": "Rachel",
     "sender_role": "PT",
@@ -825,11 +723,10 @@
     "message": "Here is a hotel gym circuit for your travel week. Let me know if any equipment is missing.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "travel_workout"
+    "attachments": []
   },
   {
-    "id": 1061,
+    "id": 1054,
     "timestamp": "2025-07-30T09:00:00",
     "sender": "Rachel",
     "sender_role": "PT",
@@ -837,11 +734,21 @@
     "message": "Time for your exercise program update for week 29. We'll adapt based on your progress.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "pt_plan_update"
+    "attachments": []
   },
   {
-    "id": 1062,
+    "id": 1057,
+    "timestamp": "2025-07-30T19:00:00",
+    "sender": "Rachel",
+    "sender_role": "PT",
+    "recipient": "Rohan Patel",
+    "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
+    "message_type": "plan_update",
+    "related_event": {},
+    "attachments": []
+  },
+  {
+    "id": 1055,
     "timestamp": "2025-07-31T09:00:00",
     "sender": "Rohan Patel",
     "sender_role": "Member",
@@ -852,7 +759,7 @@
     "attachments": []
   },
   {
-    "id": 1063,
+    "id": 1056,
     "timestamp": "2025-08-01T09:00:00",
     "sender": "Rachel",
     "sender_role": "PT",
@@ -860,11 +767,10 @@
     "message": "Here is a hotel gym circuit for your travel week. Let me know if any equipment is missing.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "travel_workout"
+    "attachments": []
   },
   {
-    "id": 1064,
+    "id": 1058,
     "timestamp": "2025-08-13T09:00:00",
     "sender": "Rachel",
     "sender_role": "PT",
@@ -872,11 +778,10 @@
     "message": "Time for your exercise program update for week 31. We'll adapt based on your progress.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "pt_plan_update"
+    "attachments": []
   },
   {
-    "id": 1067,
+    "id": 1061,
     "timestamp": "2025-08-13T19:00:00",
     "sender": "Rachel",
     "sender_role": "PT",
@@ -884,11 +789,10 @@
     "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "pt_plan_update"
+    "attachments": []
   },
   {
-    "id": 1065,
+    "id": 1059,
     "timestamp": "2025-08-14T09:00:00",
     "sender": "Rohan Patel",
     "sender_role": "Member",
@@ -899,7 +803,7 @@
     "attachments": []
   },
   {
-    "id": 1066,
+    "id": 1060,
     "timestamp": "2025-08-15T09:00:00",
     "sender": "Rachel",
     "sender_role": "PT",
@@ -907,8 +811,17 @@
     "message": "Here is a hotel gym circuit for your travel week. Let me know if any equipment is missing.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": [],
-    "explanation_id": "travel_workout"
+    "attachments": []
+  },
+  {
+    "id": 1062,
+    "timestamp": "2025-08-20T19:00:00",
+    "sender": "Rachel",
+    "sender_role": "PT",
+    "recipient": "Rohan Patel",
+    "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
+    "message_type": "plan_update",
+    "related_event": {},
+    "attachments": []
   }
 ]
-  
