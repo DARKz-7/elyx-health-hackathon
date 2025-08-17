@@ -1,6 +1,9 @@
 import random
 from datetime import timedelta
-from models import Conversation
+from models import Conversation, Plan, Intervention
+from datetime import timedelta
+from models import Metric, DiagnosticTest
+import random
 
 def advance_days(base_date, days):
     return base_date + timedelta(days=days)
@@ -42,8 +45,7 @@ def simulate_conversations_static(member, team, start_date):
     ))
     conv_id += 1
 
-    # Generate repeated member queries every two weeks for 8 weeks (approx. 2 months)
-    for month_week in range(2 * 4):
+    for month_week in range(8):  # 8 weeks, 2 weeks interval
         conv_id += 1
         recipient = random.choice([tm.name for tm in team if tm.name != member.name])
         conversations.append(Conversation(
@@ -71,9 +73,8 @@ def simulate_conversations_static(member, team, start_date):
 
 def simulate_conversations_dynamic(member, team, start_date, plans, interventions, metrics):
     conversations = []
-    conv_id = 1000  # Starting at 1000 to avoid ID conflicts
+    conv_id = 1000
 
-    # Initial greeting
     conversations.append(Conversation(
         id=conv_id,
         timestamp=start_date,
@@ -85,12 +86,11 @@ def simulate_conversations_dynamic(member, team, start_date, plans, intervention
     ))
     conv_id += 1
 
-    num_weeks = 32  # approx 8 months
-
+    num_weeks = 32
     for week in range(num_weeks):
         current_date = start_date + timedelta(weeks=week)
 
-        # Weekly check-in message from PT every 2 weeks
+        # PT messages every 2 weeks
         if week % 2 == 0:
             conversations.append(Conversation(
                 id=conv_id,
@@ -125,15 +125,140 @@ def simulate_conversations_dynamic(member, team, start_date, plans, intervention
             ))
             conv_id += 1
 
-        # Monitor exercise metric and respond if below threshold
-        week_metric = next((m for m in metrics if m.date.isocalendar()[1] == current_date.isocalendar()[1]
-                           and m.metric_type == "ExerciseMinutes"), None)
+        # Check if exercise is below threshold and react
+        week_metric = next(
+            (m for m in metrics if m.date.isocalendar()[1] == current_date.isocalendar()[1]
+             and m.metric_type == "ExerciseMinutes"), None)
         if week_metric and week_metric.value < 120:
-            # Add a plan update message indicating adjustment
             conversations.append(Conversation(
                 id=conv_id,
                 timestamp=current_date + timedelta(hours=10),
                 sender="Rachel",
                 sender_role="PT",
                 recipient=member.name,
-                message="We noticed your exercise log dropped. Adjusting your plan for a better
+                message="We noticed your exercise log dropped. Adjusting your plan for a better fit.",
+                message_type="plan_update"
+            ))
+            conv_id += 1
+
+    return conversations
+
+
+def create_personalized_plan(member, start_date):
+    return Plan(
+        id=1,
+        member_id=member.id,
+        created_by=201,  # Dr. Warren
+        created_at=start_date,
+        summary="Reduce cardiovascular risk with tailored exercise and nutrition.",
+        interventions=[101, 102],
+        version="v1.0"
+    )
+
+
+def create_interventions(member, start_date):
+    return [
+        Intervention(
+            id=101,
+            member_id=member.id,
+            created_by=205,  # Rachel (PT)
+            type="Exercise",
+            start_date=start_date,
+            end_date=None,
+            details="Start brisk walks 5x/week, 30 min each.",
+            status="active",
+            rationale="Increase physical activity for heart health.",
+            linked_conversation_id=None
+        ),
+        Intervention(
+            id=102,
+            member_id=member.id,
+            created_by=204,  # Carla (Nutritionist)
+            type="Nutrition",
+            start_date=start_date,
+            end_date=None,
+            details="Lower sodium intake; add Omega-3 rich fish 2x/week.",
+            status="active",
+            rationale="Reduce salt, increase healthy fats.",
+            linked_conversation_id=None
+        )
+    ]
+
+
+def create_metrics(member, start_date, num_weeks=32):
+    """
+    Create sample weekly metrics for the member.
+    Example metrics: ExerciseMinutes, SymptomFatigueScore
+    """
+    metrics = []
+    metric_id = 1
+
+    for week in range(num_weeks):
+        date = start_date + timedelta(weeks=week)
+
+        # Exercise minutes: simulate between 60 to 180 minutes per week with some variation
+        exercise_minutes = random.randint(60, 180)
+
+        metrics.append(Metric(
+            id=metric_id,
+            member_id=member.id,
+            metric_type="ExerciseMinutes",
+            value=exercise_minutes,
+            date=date,
+            source="WearableDevice"
+        ))
+        metric_id += 1
+
+        # Fatigue symptom score: 0-10 scale, randomly varying
+        fatigue_score = random.uniform(2.0, 6.0)
+
+        metrics.append(Metric(
+            id=metric_id,
+            member_id=member.id,
+            metric_type="SymptomFatigueScore",
+            value=round(fatigue_score, 1),
+            date=date,
+            source="SelfReport"
+        ))
+        metric_id += 1
+
+    return metrics
+
+
+from datetime import datetime
+
+def create_diagnostic_tests(member):
+    dob_date = datetime.strptime(member.dob, "%Y-%m-%d")
+
+    tests = []
+
+    tests.append(DiagnosticTest(
+        id=1,
+        member_id=member.id,
+        test_type="Lipid Panel",
+        test_date=dob_date,   # use datetime object here
+        results={
+            "LDL": 130.0,
+            "HDL": 45.0,
+            "Triglycerides": 150.0,
+            "TotalCholesterol": 210.0
+        },
+        ordered_by=201,
+        summary="Borderline high LDL and triglycerides, recommend lifestyle changes."
+    ))
+
+    tests.append(DiagnosticTest(
+        id=2,
+        member_id=member.id,
+        test_type="Blood Pressure",
+        test_date=dob_date,
+        results={
+            "Systolic": 135,
+            "Diastolic": 85
+        },
+        ordered_by=201,
+        summary="Elevated blood pressure, monitor regularly."
+    ))
+
+    return tests
+

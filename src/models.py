@@ -1,12 +1,14 @@
-from dataclasses import dataclass, field, asdict
+from dataclasses import dataclass, field
 from typing import List, Optional, Dict
 from datetime import datetime
+
 
 @dataclass
 class TeamMember:
     id: int
     name: str
     role: str
+
 
 @dataclass
 class Member:
@@ -23,6 +25,7 @@ class Member:
     personal_assistant: str
     support_network: List[str]
 
+
 @dataclass
 class Conversation:
     id: int
@@ -35,6 +38,7 @@ class Conversation:
     related_event: Optional[Dict[str, int]] = field(default_factory=dict)
     attachments: Optional[List[str]] = field(default_factory=list)
 
+
 @dataclass
 class DiagnosticTest:
     id: int
@@ -45,6 +49,7 @@ class DiagnosticTest:
     ordered_by: int
     summary: str
 
+
 @dataclass
 class Plan:
     id: int
@@ -54,6 +59,7 @@ class Plan:
     summary: str
     interventions: List[int]
     version: str
+
 
 @dataclass
 class Intervention:
@@ -68,6 +74,7 @@ class Intervention:
     rationale: str
     linked_conversation_id: Optional[int]
 
+
 @dataclass
 class Metric:
     id: int
@@ -77,21 +84,8 @@ class Metric:
     date: datetime
     source: str
 
-    # --- Model Validation Utilities ---
-def validate_diagnostic_tests(tests):
-    for test in tests:
-        validate_diagnostic_test(test)
-    print("All diagnostic tests validated successfully.")
 
-def validate_plans(plans):
-    for plan in plans:
-        validate_plan(plan)
-    print("All plans validated successfully.")
-
-def validate_interventions(interventions):
-    for inter in interventions:
-        validate_intervention(inter)
-    print("All interventions validated successfully.")
+# --- Model Validation Utilities ---
 
 def validate_member(member):
     assert member.name, "Name cannot be empty"
@@ -99,10 +93,12 @@ def validate_member(member):
     assert isinstance(member.travel_hubs, list), "Travel hubs should be a list"
     print(f"Member {member.name} validated successfully.")
 
+
 def validate_team(team):
     for tm in team:
         assert tm.role, f"Team member {tm.name} must have a role"
     print("All team members validated successfully.")
+
 
 def validate_conversation(convs):
     for conv in convs:
@@ -111,24 +107,46 @@ def validate_conversation(convs):
         assert conv.recipient, f"Conversation ID {conv.id} has empty recipient"
     print("All conversations validated successfully.")
 
+
 def validate_diagnostic_test(test):
     assert test.test_type, "DiagnosticTest must have a test_type"
     assert isinstance(test.results, dict), "Results should be a dictionary"
     print(f"DiagnosticTest ID {test.id} validated.")
+
+
+def validate_diagnostic_tests(tests):
+    for test in tests:
+        validate_diagnostic_test(test)
+    print("All diagnostic tests validated successfully.")
+
 
 def validate_plan(plan):
     assert plan.summary, "Plan must have a summary"
     assert isinstance(plan.interventions, list), "Interventions must be a list"
     print(f"Plan ID {plan.id} validated.")
 
+
+def validate_plans(plans):
+    for plan in plans:
+        validate_plan(plan)
+    print("All plans validated successfully.")
+
+
 def validate_intervention(inter):
     assert inter.type, "Intervention must have a type"
     assert inter.status in ["active", "completed", "changed"], "Status must be active, completed, or changed"
     print(f"Intervention ID {inter.id} validated.")
+
+
+def validate_interventions(interventions):
+    for inter in interventions:
+        validate_intervention(inter)
+    print("All interventions validated successfully.")
+
+
 def validate_metrics(metrics):
     for metric in metrics:
         assert metric.metric_type, f"Metric ID {metric.id} missing type"
         assert metric.value is not None, f"Metric ID {metric.id} missing value"
         assert metric.date, f"Metric ID {metric.id} missing date"
     print("All metrics validated successfully.")
-

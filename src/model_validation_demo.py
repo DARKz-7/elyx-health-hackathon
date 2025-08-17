@@ -1,72 +1,51 @@
-from models import Member, TeamMember, Conversation
+from models import Member, TeamMember, Conversation, DiagnosticTest, Plan, Intervention, Metric
 from datetime import datetime
 
 def validate_member(member):
-    assert member.name, "Name cannot be empty"
-    assert isinstance(member.health_goals, list), "Health goals should be a list"
-    assert isinstance(member.travel_hubs, list), "Travel hubs should be a list"
-    print(f"Member {member.name} validated successfully.")
+    assert member.name, "Member name cannot be empty."
+    assert isinstance(member.health_goals, list), "Member health_goals should be a list."
+    assert isinstance(member.travel_hubs, list), "Member travel_hubs should be a list."
+    print(f"Member '{member.name}' validated successfully.")
 
 def validate_team(team):
     for tm in team:
-        assert tm.role, f"Team member {tm.name} must have a role"
+        assert tm.name, "Team member name is required."
+        assert tm.role, f"Team member '{tm.name}' must have a role."
     print("All team members validated successfully.")
 
-def validate_conversation(convs):
-    for conv in convs:
-        assert conv.message, "All conversations must have non-empty messages"
-        assert conv.sender, f"Conversation ID {conv.id} has empty sender"
-        assert conv.recipient, f"Conversation ID {conv.id} has empty recipient"
+def validate_conversation(conversations):
+    for conv in conversations:
+        assert conv.message, f"Conversation ID {conv.id} must have non-empty message."
+        assert conv.sender, f"Conversation ID {conv.id} has empty sender."
+        assert conv.recipient, f"Conversation ID {conv.id} has empty recipient."
+        assert isinstance(conv.timestamp, datetime), f"Conversation ID {conv.id} must have valid timestamp."
     print("All conversations validated successfully.")
 
 def validate_diagnostic_tests(tests):
     for test in tests:
-        assert test.test_type, f"Diagnostic test {test.id} type cannot be empty"
-        assert test.test_date, f"Diagnostic test {test.id} date missing"
-        assert isinstance(test.results, dict), f"Diagnostic test {test.id} results must be a dictionary"
-        assert test.summary, f"Diagnostic test {test.id} summary missing"
+        assert test.test_type, f"Diagnostic test ID {test.id} type cannot be empty."
+        assert isinstance(test.test_date, datetime), f"Diagnostic test ID {test.id} must have valid date."
+        assert isinstance(test.results, dict), f"Diagnostic test ID {test.id} results must be a dictionary."
+        assert test.summary, f"Diagnostic test ID {test.id} summary is missing."
     print("All diagnostic tests validated successfully.")
 
 def validate_plans(plans):
     for plan in plans:
-        assert plan.summary, f"Plan ID {plan.id} missing summary"
-        assert isinstance(plan.interventions, list), f"Plan ID {plan.id} interventions must be list"
+        assert plan.summary, f"Plan ID {plan.id} missing summary."
+        assert isinstance(plan.interventions, list), f"Plan ID {plan.id} interventions must be a list."
     print("All plans validated successfully.")
 
-# Example data below for testing validations
-member = Member(
-    id=1,
-    name="Rohan Patel",
-    dob="1979-03-12",
-    age=46,
-    gender="Male",
-    residence="Singapore",
-    travel_hubs=["UK", "US", "Jakarta"],
-    occupation="Regional Head of Sales",
-    health_goals=["Reduce risk of heart disease"],
-    chronic_conditions=["POTS"],
-    personal_assistant="Sarah Tan",
-    support_network=["Wife", "2 kids"]
-)
+def validate_interventions(interventions):
+    for inter in interventions:
+        assert inter.type, f"Intervention ID {inter.id} missing type."
+        assert inter.details, f"Intervention ID {inter.id} missing details."
+        assert inter.status in {"active", "changed", "completed"}, \
+            f"Intervention ID {inter.id} has invalid status '{inter.status}'."
+    print("All interventions validated successfully.")
 
-team = [
-    TeamMember(id=201, name="Dr. Warren", role="Medical Strategist"),
-    TeamMember(id=202, name="Ruby", role="Concierge")
-]
-
-conv = [
-    Conversation(
-        id=1,
-        timestamp=datetime.now(),
-        sender=member.name,
-        sender_role="Member",
-        recipient="Ruby",
-        message="Hi Ruby!",
-        message_type="query"
-    )
-]
-
-# Run validations
-validate_member(member)
-validate_team(team)
-validate_conversation(conv)
+def validate_metrics(metrics):
+    for metric in metrics:
+        assert metric.metric_type, f"Metric ID {metric.id} missing metric_type."
+        assert metric.value is not None, f"Metric ID {metric.id} missing value."
+        assert isinstance(metric.date, datetime), f"Metric ID {metric.id} must have valid date."
+    print("All metrics validated successfully.")
