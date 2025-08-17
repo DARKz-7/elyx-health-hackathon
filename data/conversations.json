@@ -30,7 +30,8 @@
     "message": "Time for your exercise program update for week 1. We'll adapt based on your progress.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "pt_plan_update"
   },
   {
     "id": 2,
@@ -41,7 +42,8 @@
     "message": "Thank you, Rohan. Are you experiencing other symptoms? I'll flag Dr. Warren.",
     "message_type": "update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "concierge_update"
   },
   {
     "id": 3,
@@ -52,7 +54,8 @@
     "message": "Submission reviewed. Strongly suggests autonomic dysfunction. We'll need medical records.",
     "message_type": "report",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "report_1"
   },
   {
     "id": 1002,
@@ -85,7 +88,8 @@
     "message": "Here is a hotel gym circuit for your travel week. Let me know if any equipment is missing.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "travel_workout"
   },
   {
     "id": 1004,
@@ -96,7 +100,8 @@
     "message": "Time for your exercise program update for week 3. We'll adapt based on your progress.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "pt_plan_update"
   },
   {
     "id": 1007,
@@ -107,7 +112,8 @@
     "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "pt_plan_update"
   },
   {
     "id": 1005,
@@ -140,7 +146,8 @@
     "message": "Here is a hotel gym circuit for your travel week. Let me know if any equipment is missing.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "travel_workout"
   },
   {
     "id": 1008,
@@ -151,7 +158,8 @@
     "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "pt_plan_update"
   },
   {
     "id": 1009,
@@ -162,7 +170,8 @@
     "message": "Time for your exercise program update for week 5. We'll adapt based on your progress.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "pt_plan_update"
   },
   {
     "id": 1012,
@@ -173,7 +182,8 @@
     "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "pt_plan_update"
   },
   {
     "id": 1010,
@@ -187,17 +197,6 @@
     "attachments": []
   },
   {
-    "id": 7,
-    "timestamp": "2025-02-14T09:00:00",
-    "sender": "Rohan Patel",
-    "sender_role": "Member",
-    "recipient": "Ruby",
-    "message": "Week 1, Query 3: Read about Omega-3. Should I supplement?",
-    "message_type": "query",
-    "related_event": {},
-    "attachments": []
-  },
-  {
     "id": 1011,
     "timestamp": "2025-02-14T09:00:00",
     "sender": "Rachel",
@@ -206,7 +205,8 @@
     "message": "Here is a hotel gym circuit for your travel week. Let me know if any equipment is missing.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "travel_workout"
   },
   {
     "id": 1013,
@@ -217,7 +217,8 @@
     "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "pt_plan_update"
   },
   {
     "id": 1014,
@@ -228,7 +229,8 @@
     "message": "Time for your exercise program update for week 7. We'll adapt based on your progress.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "pt_plan_update"
   },
   {
     "id": 1015,
@@ -261,7 +263,8 @@
     "message": "Here is a hotel gym circuit for your travel week. Let me know if any equipment is missing.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "travel_workout"
   },
   {
     "id": 1017,
@@ -272,7 +275,8 @@
     "message": "Time for your exercise program update for week 9. We'll adapt based on your progress.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "pt_plan_update"
   },
   {
     "id": 1020,
@@ -283,7 +287,8 @@
     "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "pt_plan_update"
   },
   {
     "id": 1018,
@@ -316,7 +321,8 @@
     "message": "Here is a hotel gym circuit for your travel week. Let me know if any equipment is missing.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "travel_workout"
   },
   {
     "id": 1021,
@@ -327,7 +333,8 @@
     "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "pt_plan_update"
   },
   {
     "id": 1022,
@@ -338,7 +345,8 @@
     "message": "Time for your exercise program update for week 11. We'll adapt based on your progress.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "pt_plan_update"
   },
   {
     "id": 1023,
@@ -371,7 +379,8 @@
     "message": "Here is a hotel gym circuit for your travel week. Let me know if any equipment is missing.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "travel_workout"
   },
   {
     "id": 1025,
@@ -382,7 +391,8 @@
     "message": "Time for your exercise program update for week 13. We'll adapt based on your progress.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "pt_plan_update"
   },
   {
     "id": 1028,
@@ -393,7 +403,8 @@
     "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "pt_plan_update"
   },
   {
     "id": 1026,
@@ -426,7 +437,8 @@
     "message": "Here is a hotel gym circuit for your travel week. Let me know if any equipment is missing.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "travel_workout"
   },
   {
     "id": 13,
@@ -437,7 +449,8 @@
     "message": "Reminder: Time for your full diagnostic panel this week.",
     "message_type": "reminder",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "reminder_diagnostic_panel"
   },
   {
     "id": 1029,
@@ -448,7 +461,8 @@
     "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "pt_plan_update"
   },
   {
     "id": 1030,
@@ -459,7 +473,8 @@
     "message": "Time for your exercise program update for week 15. We'll adapt based on your progress.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "pt_plan_update"
   },
   {
     "id": 1033,
@@ -470,7 +485,8 @@
     "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "pt_plan_update"
   },
   {
     "id": 1031,
@@ -503,7 +519,8 @@
     "message": "Here is a hotel gym circuit for your travel week. Let me know if any equipment is missing.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "travel_workout"
   },
   {
     "id": 1034,
@@ -514,7 +531,8 @@
     "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "pt_plan_update"
   },
   {
     "id": 1035,
@@ -525,7 +543,8 @@
     "message": "Time for your exercise program update for week 17. We'll adapt based on your progress.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "pt_plan_update"
   },
   {
     "id": 1038,
@@ -536,7 +555,8 @@
     "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "pt_plan_update"
   },
   {
     "id": 1036,
@@ -558,7 +578,8 @@
     "message": "Here is a hotel gym circuit for your travel week. Let me know if any equipment is missing.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "travel_workout"
   },
   {
     "id": 1039,
@@ -569,7 +590,8 @@
     "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "pt_plan_update"
   },
   {
     "id": 1040,
@@ -580,7 +602,8 @@
     "message": "Time for your exercise program update for week 19. We'll adapt based on your progress.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "pt_plan_update"
   },
   {
     "id": 1041,
@@ -602,7 +625,8 @@
     "message": "Here is a hotel gym circuit for your travel week. Let me know if any equipment is missing.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "travel_workout"
   },
   {
     "id": 1043,
@@ -613,7 +637,8 @@
     "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "pt_plan_update"
   },
   {
     "id": 1044,
@@ -624,18 +649,8 @@
     "message": "Time for your exercise program update for week 21. We'll adapt based on your progress.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
-  },
-  {
-    "id": 1047,
-    "timestamp": "2025-06-04T19:00:00",
-    "sender": "Rachel",
-    "sender_role": "PT",
-    "recipient": "Rohan Patel",
-    "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
-    "message_type": "plan_update",
-    "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "pt_plan_update"
   },
   {
     "id": 1045,
@@ -657,7 +672,8 @@
     "message": "Here is a hotel gym circuit for your travel week. Let me know if any equipment is missing.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "travel_workout"
   },
   {
     "id": 1048,
@@ -668,7 +684,8 @@
     "message": "Time for your exercise program update for week 23. We'll adapt based on your progress.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "pt_plan_update"
   },
   {
     "id": 1051,
@@ -679,7 +696,8 @@
     "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "pt_plan_update"
   },
   {
     "id": 1049,
@@ -701,7 +719,8 @@
     "message": "Here is a hotel gym circuit for your travel week. Let me know if any equipment is missing.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "travel_workout"
   },
   {
     "id": 1052,
@@ -712,7 +731,8 @@
     "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "pt_plan_update"
   },
   {
     "id": 1053,
@@ -723,7 +743,8 @@
     "message": "Time for your exercise program update for week 25. We'll adapt based on your progress.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "pt_plan_update"
   },
   {
     "id": 1056,
@@ -734,7 +755,8 @@
     "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "pt_plan_update"
   },
   {
     "id": 1054,
@@ -756,7 +778,8 @@
     "message": "Here is a hotel gym circuit for your travel week. Let me know if any equipment is missing.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "travel_workout"
   },
   {
     "id": 1057,
@@ -767,7 +790,8 @@
     "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "pt_plan_update"
   },
   {
     "id": 1058,
@@ -778,7 +802,8 @@
     "message": "Time for your exercise program update for week 27. We'll adapt based on your progress.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "pt_plan_update"
   },
   {
     "id": 1059,
@@ -800,7 +825,8 @@
     "message": "Here is a hotel gym circuit for your travel week. Let me know if any equipment is missing.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "travel_workout"
   },
   {
     "id": 1061,
@@ -811,7 +837,8 @@
     "message": "Time for your exercise program update for week 29. We'll adapt based on your progress.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "pt_plan_update"
   },
   {
     "id": 1062,
@@ -833,7 +860,8 @@
     "message": "Here is a hotel gym circuit for your travel week. Let me know if any equipment is missing.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "travel_workout"
   },
   {
     "id": 1064,
@@ -844,7 +872,8 @@
     "message": "Time for your exercise program update for week 31. We'll adapt based on your progress.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "pt_plan_update"
   },
   {
     "id": 1067,
@@ -855,7 +884,8 @@
     "message": "We noticed your exercise log dropped. Adjusting your plan for a better fit.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "pt_plan_update"
   },
   {
     "id": 1065,
@@ -877,6 +907,8 @@
     "message": "Here is a hotel gym circuit for your travel week. Let me know if any equipment is missing.",
     "message_type": "plan_update",
     "related_event": {},
-    "attachments": []
+    "attachments": [],
+    "explanation_id": "travel_workout"
   }
 ]
+  

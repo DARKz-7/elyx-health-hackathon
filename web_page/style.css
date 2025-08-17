@@ -1,271 +1,188 @@
-/* Style for Elyx Member Journey Viewer */
-body {
-  background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+/* Basic resets */
+* {
+  box-sizing: border-box;
   margin: 0;
-  font-family: 'Segoe UI', Arial, sans-serif;
-  color: #314361;
+  padding: 0;
+  font-family: Arial, sans-serif;
 }
 
-/* NAV BAR STYLE */
-nav {
-  margin: 1.5em auto;
-  background: #e9eafd;
-  border-radius: 12px;
-  padding: 0.7em 0;
-  width: 90%;
-  max-width: 700px;
-  font-family: inherit;
-  font-size: 1.10em;
-  box-shadow: 0 2px 10px #0001;
-  text-align: center;
-}
-
-nav a {
-  color: #3c3cff;
-  padding: 0.3em 1em;
-  border-radius: 6px;
-  text-decoration: none;
-  transition: background 0.2s, color 0.2s;
-  font-weight: 600;
-  display: inline-block;
-  margin: 0 0.18em;
-}
-
-nav a:hover, nav a.active {
-  background: #3c3cff;
-  color: #fff;
-}
-
-/* HEADER STYLE */
-header {
-  text-align: center;
-  padding: 28px 10px 15px 10px;
-  background: #4f46e5;
-  color: white;
-  border-bottom-left-radius: 30px 20px;
-  border-bottom-right-radius: 30px 20px;
-  box-shadow: 0 2px 16px #aaa8f6;
+body {
+  background: #f9f9f9;
+  color: #222;
+  padding: 1em;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 header h1 {
-  margin: 0;
-  font-size: 2.2em;
-  letter-spacing: 1px;
-}
-
-/* Controls (search etc.) */
-#controls {
-  max-width: 900px;
-  margin: 34px auto 16px auto;
-  display: flex;
-  gap: 16px;
-  align-items: center;
-  padding: 0 8px;
-  justify-content: center;
-}
-#controls input, #controls button {
-  font-size: 1em;
-  border-radius: 8px;
-  border: 1px solid #ccd;
-  padding: 7px 15px;
-  box-sizing: border-box;
-}
-#controls input[type="text"] { max-width: 320px; }
-#controls button {
-  background: #4f46e5;
-  color: white;
-  border: none;
-  cursor: pointer;
-  font-weight: 500;
-}
-
-/* CHAT CONTAINER */
-#chat-container {
-  max-width: 900px;
-  margin: 0 auto 50px auto;
-  background: #fff;
-  border-radius: 18px;
-  box-shadow: 0 0 24px rgba(80,92,150,0.13);
-  padding: 30px 18px;
-  min-height: 400px;
-}
-
-/* DATE HEADER */
-.date-header {
-  font-weight: bold;
-  font-size: 1.08em;
-  color: #4f46e5;
-  margin: 20px 0 10px 0;
+  font-size: 2rem;
+  margin-bottom: 0.2em;
   text-align: center;
 }
 
-/* CHAT ROW AND BUBBLE */
-.chat-row {
+header p {
+  color: #555;
+  font-size: 1rem;
+  margin-bottom: 1em;
+  text-align: center;
+}
+
+#controls {
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 1em;
   display: flex;
-  margin-bottom: 14px;
-  align-items: flex-end;
-}
-.chat-row.member { justify-content: flex-start; }
-.chat-row.team { justify-content: flex-end; }
-
-.bubble {
-  padding: 15px 18px;
-  border-radius: 16px;
-  max-width: 74%;
-  word-break: break-word;
-  box-shadow: 0 2px 8px #e0e7ff;
-  position: relative;
-  font-size: 1.07em;
-  animation: fadeIn 0.9s;
-  margin: 4px 0;
-  line-height: 1.5;
-  color: #000 !important; /* black text */
+  gap: 1em;
+  justify-content: center;
 }
 
-@keyframes fadeIn {
-  from { opacity:0; transform:translateY(16px);}
-  to { opacity:1; transform:translateY(0);}
+#search-input,
+#date-filter {
+  padding: 0.5em 0.75em;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  flex: 1;
+  max-width: 250px;
 }
 
-.bubble.member {
-  background: linear-gradient(135deg, #e0e7ff 70%, #fff 100%);
-  color: #444;
-  border-bottom-left-radius: 4px;
-  margin-right: 12px;
-  border: 1.5px solid #c7d3fc;
-}
-.bubble.team {
-  background: linear-gradient(135deg, #4f46e5 70%, #7180e9 100%);
-  color: #fff;
-  border-bottom-right-radius: 4px;
-  margin-left: 12px;
-  border: 1.5px solid #37328a;
-}
-
-/* Bubble Highlighting */
-.bubble.plan_update { border: 2px solid #0c8e4f; background: #e3ffe8; }
-.bubble.feedback { border: 2px solid #e0442e; background: #ffecec; box-shadow: 0 0 12px #ffb4b4; }
-.bubble.reminder { border-left: 8px solid #4f46e5; }
-
-/* Highlight doctor/team suggestions */
-.bubble.suggestion {
-  border-left: 6px solid #ffa726;
-  background: #fff8e1;
-  transition: background 0.3s, border 0.3s;
-}
-
-/* WHY BUTTON */
-.why-button {
-  background-color: #4f46e5;
+#download-chat {
+  background-color: #1877f2;
   color: white;
   border: none;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-  cursor: pointer;
-  margin-left: 8px;
-  padding: 2px 6px;
-  font-size: 0.85em;
-}
-.why-button:hover {
-  background-color: #37328a;
-}
-
-/* Animated explanation box (only one open at a time) */
-.explanation-text {
-  margin-top: 0;
-  font-style: italic;
-  background-color: #f0f0f0;
-  padding: 0 8px;
   border-radius: 6px;
-  display: block;
-  opacity: 0;
-  max-height: 0;
-  overflow: hidden;
-  transition: opacity 0.3s, max-height 0.3s, padding 0.3s, margin-top 0.3s;
-}
-.explanation-text.open {
-  opacity: 1;
-  max-height: 200px;
-  margin-top: 6px;
-  padding: 6px 8px;
-  transition: opacity 0.3s, max-height 0.3s, padding 0.3s, margin-top 0.3s;
+  padding: 0 1em;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
 }
 
-/* SENDER AND AVATAR */
+#download-chat:hover {
+  background-color: #1358c6;
+}
+
+#chat-container {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding-bottom: 2em;
+}
+
+/* Chat bubble common styles */
+.bubble {
+  padding: 1em;
+  border-radius: 16px;
+  max-width: 80%;
+  position: relative;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  background-color: #e4e6eb;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  line-height: 1.4;
+}
+
+/* Different colors for member and team */
+.member {
+  align-self: flex-start;
+  background-color: #e6f7ff;
+  border: 1px solid #91d5ff;
+}
+
+.team {
+  align-self: flex-end;
+  background-color: #d9f7be;
+  border: 1px solid #b7eb8f;
+}
+
+/* Highlight suggestion messages with border and background */
+.suggestion {
+  border: 2px solid #52c41a;
+  background-color: #f6ffed;
+}
+
+/* Sender name and role */
 .sender {
   font-weight: bold;
-  font-size: 0.97em;
-  margin-bottom: 4px;
-  display: flex;
-  gap: 4px;
-  align-items: center;
+  margin-bottom: 0.3em;
+  color: #333;
+  user-select: text;
 }
-.sender .role { font-weight: normal; font-size: 0.93em; color: #4f46e5; margin-left: 4px; }
-.bubble.team .sender .role { color: #c8e6c9; }
 
-/* AVATAR */
-.avatar {
-  width: 34px;
-  height: 34px;
-  background: #e0e7ff;
-  border-radius: 50%;
-  margin-right: 8px;
-  margin-left: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1em;
-  font-weight: bold;
-  color: #4f46e5;
-  box-shadow: 0 1px 4px #bbb;
-  letter-spacing: 1px;
+.role {
+  font-weight: normal;
+  font-size: 0.85rem;
+  color: #888;
 }
-.chat-row.team .avatar { background: #4f46e5; color: #fff; }
 
-/* TIMESTAMP & ATTACHMENTS */
+/* Message text */
+.message-text {
+  font-size: 1rem;
+  margin-bottom: 0.5em;
+}
+
+/* Timestamp */
 .timestamp {
-  font-size: 0.85em;
-  color: #9099b7;
-  margin-top: 8px;
+  font-size: 0.75rem;
+  color: #999;
   text-align: right;
-}
-.attachments {
-  font-size: 0.9em;
-  color: #314361;
-  margin: 4px 0 0 0;
+  user-select: none;
 }
 
-/* METRICS TABLE (used for metrics.html & plans.html) */
-.metrics-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 24px 0;
-  font-size: 1.08em;
-}
-.metrics-table th, .metrics-table td {
-  padding: 12px 10px;
-  text-align: left;
-}
-.metrics-table th {
-  background: #e9eafd;
-  color: #3c3cff;
-}
-.metrics-table tr:nth-child(even) {
-  background: #f8fafc;
-}
-.metrics-table tr:nth-child(odd) {
-  background: #fff;
-}
-.metrics-table td {
-  color: #222;
+/* Why button styles */
+.why-button {
+  display: inline-block;
+  margin-top: 0.4em;
+  cursor: pointer;
+  border: 1.5px solid #52c41a;
+  background-color: transparent;
+  color: #52c41a;
+  padding: 0.25em 0.6em;
+  font-size: 0.85rem;
+  border-radius: 12px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  user-select: none;
 }
 
-/* RESPONSIVENESS */
-@media (max-width:600px) {
-  #chat-container { padding: 8px; }
-  .bubble { font-size: 0.95em; }
-  #controls { flex-wrap: wrap; gap:8px; }
-  .metrics-table th, .metrics-table td { padding: 8px 4px; font-size: 0.99em; }
+.why-button:hover {
+  background-color: #52c41a;
+  color: white;
+}
+
+/* Explanation text hidden by default */
+.explanation-text {
+  max-width: 90%;
+  margin-top: 0.5em;
+  font-size: 0.9rem;
+  line-height: 1.3;
+  color: #225522;
+  background-color: #f0fff0;
+  border: 1px solid #b7eb8f;
+  border-radius: 12px;
+  padding: 0.7em 1em;
+  display: none;
+  user-select: text;
+}
+
+/* Show explanation when open */
+.explanation-text.open {
+  display: block;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  #controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.7em;
+  }
+  .bubble {
+    max-width: 100%;
+  }
 }
 
 
