@@ -1,0 +1,26 @@
+[
+  {
+    "id": 101,
+    "member_id": 1,
+    "created_by": 205,
+    "type": "Exercise",
+    "start_date": "2025-01-15T09:00:00",
+    "end_date": null,
+    "details": "Start brisk walks 5x/week, 30 min each.",
+    "status": "active",
+    "rationale": "Increase physical activity for heart health.",
+    "linked_conversation_id": null
+  },
+  {
+    "id": 102,
+    "member_id": 1,
+    "created_by": 204,
+    "type": "Nutrition",
+    "start_date": "2025-01-15T09:00:00",
+    "end_date": null,
+    "details": "Lower sodium intake; add Omega-3 rich fish 2x/week.",
+    "status": "active",
+    "rationale": "Reduce salt, increase healthy fats.",
+    "linked_conversation_id": null
+  }
+]

@@ -1,0 +1,3 @@
+id,member_id,created_by,type,start_date,end_date,details,status,rationale,linked_conversation_id
+101,1,205,Exercise,2025-01-15T09:00:00,,"Start brisk walks 5x/week, 30 min each.",active,Increase physical activity for heart health.,
+102,1,204,Nutrition,2025-01-15T09:00:00,,Lower sodium intake; add Omega-3 rich fish 2x/week.,active,"Reduce salt, increase healthy fats.",

@@ -1,0 +1,28 @@
+[
+  {
+    "id": 1,
+    "member_id": 1,
+    "test_type": "Lipid Panel",
+    "test_date": "1979-03-12T00:00:00",
+    "results": {
+      "LDL": 130.0,
+      "HDL": 45.0,
+      "Triglycerides": 150.0,
+      "TotalCholesterol": 210.0
+    },
+    "ordered_by": 201,
+    "summary": "Borderline high LDL and triglycerides, recommend lifestyle changes."
+  },
+  {
+    "id": 2,
+    "member_id": 1,
+    "test_type": "Blood Pressure",
+    "test_date": "1979-03-12T00:00:00",
+    "results": {
+      "Systolic": 135,
+      "Diastolic": 85
+    },
+    "ordered_by": 201,
+    "summary": "Elevated blood pressure, monitor regularly."
+  }
+]

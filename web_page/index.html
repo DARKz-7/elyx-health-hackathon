@@ -6,13 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* Highlight doctor suggestions */
     .bubble.suggestion {
       border-left: 6px solid #ffa726;
       background: #fff8e1;
       transition: background 0.3s, border 0.3s;
     }
-    /* Smooth fade-in for explanation */
     .explanation-text {
       transition: opacity 0.25s;
       opacity: 0;
@@ -28,128 +26,84 @@
   </style>
 </head>
 <body>
-  <!-- Navigation Menu -->
   <nav>
     <a href="index.html">Chat</a> |
     <a href="metrics.html">Metrics</a> |
     <a href="plans.html">Plan</a>
   </nav>
-
-  <!-- Header -->
   <header>
     <h1>Elyx Member Journey</h1>
     <p>WhatsApp-style visualization with search, highlight, grouping, and download</p>
   </header>
-
-  <!-- Controls -->
   <div id="controls">
     <input type="text" id="search-input" placeholder="Search by sender or text..." />
     <input type="date" id="date-filter" />
     <button id="download-chat">Download Visible Chat</button>
   </div>
-
-  <!-- Chat container -->
-  <div id="chat-container">
-    <!-- Chat messages rendered here -->
-  </div>
-
+  <div id="chat-container"></div>
   <script>
-    // ---- Sample chat data ----
-    // `explanation_id` signals a doctor/nurse suggestion that should get a Why button and a real explanation pulled dynamically
-    // In your prod app, pull this from a real backend/db
-    const conversations = [
-      {
-        timestamp: new Date("2025-08-15T09:30:00"),
-        sender: "Dr. Warren",
-        sender_role: "Doctor",
-        message: "My suggestion is to increase your daily steps to 9,000 to improve your heart health.",
-        explanation_id: "rec1"
-      },
-      {
-        timestamp: new Date("2025-08-15T09:34:00"),
-        sender: "Rahul",
-        sender_role: "Member",
-        message: "Why is this needed?"
-      },
-      {
-        timestamp: new Date("2025-08-15T09:52:00"),
-        sender: "Dr. Warren",
-        sender_role: "Doctor",
-        message: "I also recommend you switch your BP med to the night—will help your sleep and morning energy.",
-        explanation_id: "rec2"
-      },
-      {
-        timestamp: new Date("2025-08-16T10:02:00"),
-        sender: "Rachel",
-        sender_role: "PT",
-        message: "We'll meet Tuesday for a stretching session. Keep logging!"
-      }
-    ];
-
-    // ---- Mock API for suggestions (replace this with your real API call) ----
-    // In production this would be an async fetch to your service.
+    let conversations = [];
+    // Explain mapping for doctor suggestions if explanation_id exists
     const explanationAPI = {
       rec1: "Research shows daily step goals over 8,000 reduce cardiovascular risk. Your HRV readings suggest you're likely to benefit from increased light activity.",
       rec2: "Taking antihypertensive medication in the evening can optimize 24-hour blood pressure control and support restorative sleep (see Smolensky et al, 2020)."
+      // Add/remap others as desired
     };
-
-    // Simulated API fetch
     function fetchExplanation(explanationId) {
       return new Promise((resolve) => {
         setTimeout(() => {
           resolve(explanationAPI[explanationId] || "Detailed rationale not found.");
-        }, 200); // simulate latency
+        }, 200);
       });
     }
+    async function loadAndRenderChats() {
+      try {
+        const response = await fetch('../data/conversations.json');
 
-    // ---- Render Chat ----
+        conversations = await response.json();
+        conversations.forEach(c => {
+          if (typeof c.timestamp === "string") {
+            c.timestamp = new Date(c.timestamp);
+          }
+        });
+        renderChats(conversations);
+      } catch (error) {
+        document.getElementById('chat-container').innerHTML = '<div style="color:red;">Could not load conversation data.</div>';
+        console.error(error);
+      }
+    }
     async function renderChats(filteredChats) {
       const container = document.getElementById('chat-container');
       container.innerHTML = '';
-
-      for (let i=0; i<filteredChats.length; ++i) {
-        const conv = filteredChats[i];
+      for (let conv of filteredChats) {
         const bubble = document.createElement('div');
         bubble.classList.add('bubble');
-
-        // Doctor/health team: outgoing suggestion
-        if (conv.sender_role && ["Doctor","PT","Concierge","Coach"].includes(conv.sender_role)) {
+        if (conv.sender_role && ["Doctor", "PT", "Concierge", "Coach"].includes(conv.sender_role)) {
           bubble.classList.add('team');
         } else {
           bubble.classList.add('member');
         }
-
-        // Highlight if suggestion/explanation
         if (conv.explanation_id) {
           bubble.classList.add('suggestion');
         }
-
         const timeStr = conv.timestamp.toLocaleString('en-GB', {
           day: '2-digit', month: '2-digit', year: 'numeric',
           hour: '2-digit', minute: '2-digit'
         });
-
         bubble.innerHTML = `
-          <div class="sender">${conv.sender} <span class="role">(${conv.sender_role || ''})</span></div>
+          <div class="sender"><strong>${conv.sender}</strong> <span class="role">(${conv.sender_role || ''})</span></div>
           <div class="message-text">${conv.message}</div>
           <div class="timestamp">${timeStr}</div>
         `;
-
-        // If doctor suggestion: add Why? button and (initially hidden) explanation, populated via API
         if (conv.explanation_id) {
           const btn = document.createElement('button');
           btn.textContent = "Why?";
           btn.className = 'why-button';
-
           const explanationDiv = document.createElement('div');
           explanationDiv.className = 'explanation-text';
-
-          // Fetch and display explanation on first click
           let loaded = false;
           btn.onclick = async () => {
-            // Hide all open explanations
             document.querySelectorAll('.explanation-text.open').forEach(el => el.classList.remove('open'));
-
             if (!loaded) {
               explanationDiv.textContent = "Loading details...";
               explanationDiv.classList.add('open');
@@ -157,24 +111,18 @@
               explanationDiv.textContent = result;
               loaded = true;
             }
-            // Toggle open state
             explanationDiv.classList.toggle('open');
           };
-
           bubble.appendChild(btn);
           bubble.appendChild(explanationDiv);
         }
-
         container.appendChild(bubble);
       }
     }
-
-    // ---- Filtering, Download, Handlers ----
     function filterChats() {
       const searchVal = document.getElementById('search-input').value.toLowerCase();
       const dateVal = document.getElementById('date-filter').value;
       let filtered = conversations;
-
       if (searchVal) {
         filtered = filtered.filter(c =>
           (c.sender && c.sender.toLowerCase().includes(searchVal)) ||
@@ -188,9 +136,23 @@
       }
       renderChats(filtered);
     }
-
     function downloadChat() {
-      const dataStr = JSON.stringify(conversations, null, 2);
+      // Download currently visible chat (filtered)
+      const searchVal = document.getElementById('search-input').value.toLowerCase();
+      const dateVal = document.getElementById('date-filter').value;
+      let filtered = conversations;
+      if (searchVal) {
+        filtered = filtered.filter(c =>
+          (c.sender && c.sender.toLowerCase().includes(searchVal)) ||
+          (c.message && c.message.toLowerCase().includes(searchVal))
+        );
+      }
+      if (dateVal) {
+        filtered = filtered.filter(c =>
+          c.timestamp.toISOString().slice(0,10) === dateVal
+        );
+      }
+      const dataStr = JSON.stringify(filtered, null, 2);
       const blob = new Blob([dataStr], { type: "application/json" });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
@@ -200,13 +162,10 @@
       a.click();
       document.body.removeChild(a);
     }
-
     document.getElementById('search-input').addEventListener('input', filterChats);
     document.getElementById('date-filter').addEventListener('change', filterChats);
     document.getElementById('download-chat').addEventListener('click', downloadChat);
-
-    // ---- Initial render ----
-    renderChats(conversations);
+    loadAndRenderChats();
   </script>
 </body>
 </html>
